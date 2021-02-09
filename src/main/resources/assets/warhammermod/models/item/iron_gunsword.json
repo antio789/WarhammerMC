@@ -1,0 +1,21 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "warhammermod:items/iron_gunsword"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "firing": 1
+      },
+      "model": "warhammermod:item/gunsecond/iron_gunsword2"
+    },
+    {
+      "predicate": {
+        "firing": 1,
+        "reloading": 2
+      },
+      "model": "warhammermod:item/gunsecond/iron_gunsword_reload"
+    }
+  ]
+}
