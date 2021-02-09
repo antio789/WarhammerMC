@@ -1,0 +1,22 @@
+{
+  "entity.skaven.ambient": {
+    "category": "entity",
+    "subtitle": "entity.skaven.ambient",
+    "sounds": [ "warhammermod:ratsound" ]
+  },
+  "entity.skaven.death": {
+    "category": "entity",
+    "subtitle": "entity.skaven.ambient",
+    "sounds": [ "warhammermod:death" ]
+  },
+  "entity.skaven.hurt": {
+    "category": "entity",
+    "subtitle": "entity.skaven.ambient",
+    "sounds": [ "warhammermod:hurt" ]
+  },
+  "flamethrower": {
+    "category": "entity",
+    "subtitle": "flame",
+    "sounds": [ "warhammermod:flame" ]
+  }
+}
