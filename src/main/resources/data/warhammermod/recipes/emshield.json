@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+
+  "pattern":
+  [
+    "III",
+    "WSR",
+    " I "
+  ],
+
+  "key":
+  {
+    "I": {
+      "item":"minecraft:iron_ingot"
+    },
+    "S":
+    {
+      "item": "minecraft:shield"
+    },
+    "W":{
+      "item":"minecraft:white_dye"
+    },
+    "R":{
+      "item":"minecraft:red_dye"
+    }
+  },
+
+  "result":
+  {
+    "item": "warhammermod:imperial_shield",
+    "count": 1
+  }
+}

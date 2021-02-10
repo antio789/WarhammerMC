@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+
+  "pattern": [
+    "PPP",
+    " SP",
+    " S "
+  ],
+
+  "key": {
+    "P": {
+      "tag": "minecraft:planks"
+    }
+  },
+    "result": {
+      "item": "warhammermod:wooden_warhammer",
+      "count": 1
+    }
+}

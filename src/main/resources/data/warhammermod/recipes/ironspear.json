@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+
+  "pattern":
+  [
+    "  W",
+    " S ",
+    "S  "
+  ],
+
+  "key":
+  {
+    "W": {
+      "item":"minecraft:iron_ingot"
+    },
+    "S":
+    {
+      "item": "minecraft:stick"
+    }
+  },
+
+  "result":
+  {
+    "item": "warhammermod:iron_spear",
+    "count": 1
+  }
+}

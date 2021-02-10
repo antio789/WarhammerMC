@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+
+  "ingredients": [
+    {
+      "item":"minecraft:iron_sword"
+    },
+    {
+      "item":"minecraft:slime_ball"
+    },
+    {
+      "item":"warhammermod:flintlock_pistol"
+    }
+  ],
+
+  "result":
+  {
+    "item": "warhammermod:iron_gunsword",
+    "count": 1
+  }
+}
