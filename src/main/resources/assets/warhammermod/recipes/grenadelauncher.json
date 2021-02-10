@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+
+  "pattern": [
+    " II",
+    "M  ",
+    " II"
+  ],
+
+  "key": {
+    "M": {
+      "item": "warhammermod:musket"
+    },
+    "I": {
+      "item":"minecraft:iron_ingot"
+    }
+  },
+
+  "result":
+  {
+    "item": "warhammermod:grenade_launcher",
+    "count": 1
+  }
+}

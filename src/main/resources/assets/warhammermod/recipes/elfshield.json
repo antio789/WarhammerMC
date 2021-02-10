@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+
+  "pattern":
+  [
+    "GGG",
+    "PSP",
+    " G "
+  ],
+
+  "key":
+  {
+    "G": {
+      "item":"minecraft:gold_ingot"
+    },
+    "S":
+    {
+      "item": "minecraft:shield"
+    },
+    "P":{
+      "item":"minecraft:purple_dye"
+    }
+  },
+
+  "result":
+  {
+    "item": "warhammermod:dark_elf_shield",
+    "count": 1
+  }
+}
