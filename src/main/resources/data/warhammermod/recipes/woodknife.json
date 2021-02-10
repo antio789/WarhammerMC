@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+
+  "pattern":
+  [
+    "P",
+    "S",
+    " "
+
+  ],
+
+  "key":
+  {
+    "P": {
+      "tag": "minecraft:planks"
+    },
+    "S":
+    {
+      "item": "minecraft:stick"
+    }
+  },
+
+  "result":
+  {
+    "item": "warhammermod:wooden_knife",
+    "count": 1
+  }
+}

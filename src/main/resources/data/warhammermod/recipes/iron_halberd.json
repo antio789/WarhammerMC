@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+
+  "pattern":
+  [
+    " WW",
+    " SW",
+    "S  "
+  ],
+  "key":
+  {
+    "W": {
+      "item":"minecraft:iron_ingot"
+    },
+    "S":
+    {
+      "item": "minecraft:stick"
+    }
+  },
+
+  "result":
+  {
+    "item": "warhammermod:iron_halberd",
+    "count": 1
+  }
+}
