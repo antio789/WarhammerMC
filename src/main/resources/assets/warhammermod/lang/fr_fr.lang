@@ -1,0 +1,101 @@
+item.cartridge.name=Cartouche
+item.bullet.name=Balle
+item.grenade.name=Grenade
+item.shotgun shells.name=Cartouche de Tromblon
+
+item.beer.name=Bière
+
+item.Ghal Maraz.name=Ghal Maraz
+item.war pick.name=Pioche de Combat
+item.Drakegun.name=Fusil-Dragon
+item.thunderer handgun.name=Arquebuse Naine
+item.GrudgeRaker.name=Grudge-Raker
+item.blunderbuss.name=Tromblon
+
+item.diamond chainmail helmet.name=Casque de Mailles en Diamant
+item.diamond chainmail.name=ctte de mailles en diamant
+item.diamond chainmail leggings.name=Jambière de Mailles en Diamant
+item.diamond chainmail boots.name=Botte de Mailles en Diamant
+
+item.musket.name=Arquebuse
+item.nuln repeater handgun.name=Arquebuse à Répétition de Nuln
+item.flintlock pistol.name=Pistolet
+item.grenade launcher.name=Lanceur de Grenade
+item.diamond gunsword.name=épée-Pistolet en Diamant
+item.iron gunsword.name=épée-pistolet en Fer
+
+item.wooden spear.name=Lance en Bois
+item.stone spear.name=Lance en Pierre
+item.iron spear.name=Lance en Fer
+item.gold spear.name=Lance en Or
+item.diamond spear.name=Lance en Diamant
+
+item.diamond warhammer.name=Marteau d'Armes en Diamant
+item.wooden warhammer.name=Marteau d'Armes en Bois
+item.stone warhammer.name=Marteau d'Armes en Pierre
+item.iron warhammer.name=Marteau d'Armes en Fer
+item.gold warhammer.name=Marteau d'Armes en Or
+
+item.wooden knife.name=Couteau en Bois
+item.stone knife.name=Couteau en Pierre
+item.iron knife.name=Couteau en Fer
+item.gold knife.name=Couteau en Or
+item.diamond knife.name=Couteau en Diamant
+
+item.diamond halberd.name=Hallebarde en Diamant
+item.gold halberd.name=Hallebarde en Or
+item.iron halberd.name=Hallebarde en Fer
+item.stone halberd.name=Hallebarde en Pierre
+item.wooden halberd.name=Hallebarde en Bois
+
+entity.dwarf.name=Nain
+Farmer=Fermier
+Weapon Engineer=ingénieur
+Builder=Constructeur
+Miner=Mineur
+Lord=Seigneur
+
+item.warplock jezzail.name=Warplock Jezzail
+item.ratling gun.name=Ratling Gun
+entity.Pirate Skeleton.name=Pirate Skeleton
+item.shotgun_shells.name=Shotgun Shells
+item.warpstone.name=Warpstone
+item.ghal_maraz.name=Ghal Maraz
+item.war_pick.name=War Pick
+item.drakegun.name=Drakegun
+item.thunderer_handgun.name=Thunderer Handgun
+item.grudgeraker.name=Grudge-Raker
+item.diamond_chainmail_helmet.name=Diamond Chainmail Helmet
+item.diamond_chainmail.name=Diamond Chainmail
+item.diamond_chainmail_leggings.name=Diamond Chainmail Leggings
+item.diamond_chainmail_boots.name=Diamond Chainmail Boots
+item.nuln_repeater handgun.name=Nuln Repeater Handgun
+item.flintlock_pistol.name=Flintlock Pistol
+item.grenade_launcher.name=Grenade Launcher
+item.diamond_gunsword.name=Diamond Gunsword
+item.iron_gunsword.name=Iron Gunsword
+item.warplock_jezzail.name=Warplock Jezzail
+item.sling.name=Sling
+item.ratling_gun.name=Ratling Gun
+item.wooden_spear.name=Wooden Spear
+item.stone_spear.name=Stone Spear
+item.iron_spear.name=Iron Spear
+item.gold_spear.name=Gold Spear
+item.diamond_spear.name=Diamond Spear
+item.diamond_warhammer.name=Diamond Warhammer
+item.wooden_warhammer.name=wooden Warhammer
+item.stone_warhammer.name=Stone Warhammer
+item.iron_warhammer.name=Iron Warhammer
+item.gold_warhammer.name=Gold Warhammer
+item.wooden_knife.name=Wooden Knife
+item.stone_knife.name=Stone Knife
+item.iron_knife.name=Iron Knife
+item.gold_knife.name=Gold Knife
+item.diamond_knife.name=Diamond Knife
+item.diamond_halberd.name=Diamond Halberd
+item.gold_halberd.name=Gold Halberd
+item.iron_halberd.name=Iron Halberd
+item.stone_halberd.name=Stone Halberd
+item.wooden_halberd.name=Wooden Halberd
+entity.pegasus.name=Pegasus
+entity.skaven.name=skaven

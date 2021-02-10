@@ -1,0 +1,11 @@
+{
+  "parent": "item/shield",
+  "overrides": [
+    {
+      "predicate": {
+        "blocking": 1
+      },
+      "model": "item/shield_blocking"
+    }
+  ]
+}
