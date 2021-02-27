@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+
+  "pattern":
+  [
+    "I",
+    "S",
+    " "
+
+  ],
+
+  "key":
+  {
+    "I": {
+      "item":"minecraft:cobblestone"
+    },
+    "S":
+    {
+      "item": "minecraft:stick"
+    }
+  },
+
+  "result":
+  {
+    "item": "warhammermod:stone knife",
+    "count": 1
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shapeless",
+
+  "ingredients": [
+    {
+      "item":"minecraft:iron_nugget"
+    },
+    {
+      "item":"minecraft:paper"
+    },
+    {
+      "item":"minecraft:gunpowder"
+    },
+    {
+      "item":"minecraft:iron_nugget"
+    },
+    {
+      "item":"minecraft:iron_nugget"
+    },
+    {
+      "item":"minecraft:iron_nugget"
+    },
+    {
+      "item":"minecraft:iron_nugget"
+    }
+  ],
+
+  "result":
+  {
+    "item": "warhammermod:shotgun shells",
+    "count": 1
+  }
+}

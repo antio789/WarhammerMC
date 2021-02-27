@@ -1,0 +1,81 @@
+{
+  "type": "minecraft:crafting_shaped",
+
+  "pattern": [
+    "FII",
+    "III",
+    "LPP"
+  ],
+
+  "key": {
+    "F": {
+      "item": "minecraft:flint_and_steel"
+    },
+    "I": {
+      "item":"minecraft:iron_ingot"
+    },
+    "P": [
+      {
+        "item": "minecraft:planks",
+        "data": 0
+      },
+      {
+        "item": "minecraft:planks",
+        "data": 1
+      },
+      {
+        "item": "minecraft:planks",
+        "data": 2
+      },
+      {
+        "item": "minecraft:planks",
+        "data": 3
+      },
+      {
+        "item": "minecraft:planks",
+        "data": 4
+      },
+      {
+        "item": "minecraft:planks",
+        "data": 5
+      }
+    ],
+    "L":[
+      {
+        "item": "minecraft:log",
+        "data": 0
+      },
+      {
+        "item": "minecraft:log",
+        "data": 1
+      },
+      {
+        "item": "minecraft:log",
+        "data": 2
+      },
+      {
+        "item": "minecraft:log",
+        "data": 3
+      },
+      {
+        "item": "minecraft:log",
+        "data": 4
+      },
+      {
+        "item": "minecraft:log",
+        "data": 5
+      },
+      {
+        "item": "minecraft:log2",
+        "data": 0
+      }
+    ]
+
+  },
+
+  "result":
+  {
+    "item": "warhammermod:blunderbuss",
+    "count": 1
+  }
+}
