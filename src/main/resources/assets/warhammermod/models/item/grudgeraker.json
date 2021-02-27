@@ -1,0 +1,38 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "warhammermod:items/grudgeraker"
+  },
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [ 10, -90, 55 ],
+      "translation": [ 0, 1, -1 ],
+      "scale": [ 1, 1,1 ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [ 10, 90, -55 ],
+      "translation": [ 0, 1, -1 ],
+      "scale": [ 1,1,1 ]
+    }
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "reloading": 1
+      },
+      "model": "warhammermod:item/gunsecond/grudgeraker"
+    },
+    {
+      "predicate": {
+        "reloading": 2
+      },
+      "model": "warhammermod:item/gunsecond/grudgeraker2"
+    },
+    {
+      "predicate": {
+        "aimwithshield": 1
+      },
+      "model": "warhammermod:item/gunsecond/grudgeraker aim"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "Entity/generated",
+  "textures": {
+    "layer0": "warhammermod:items/entityspeartest"
+  }
+}
