@@ -3,11 +3,13 @@ package warhammermod;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
+import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
@@ -45,6 +47,8 @@ import warhammermod.util.reference;
 import warhammermod.worldgen.*;
 
 import java.util.List;
+
+import static warhammermod.util.proxy.clientproxy.mapshow;
 
 
 @Mod(modid = reference.modid,useMetadata = true)
@@ -149,10 +153,39 @@ public class Main {
     }
 
 
+    protected static final ResourceLocation WIKI_image = new ResourceLocation(reference.modid,"textures/special/modwiki.png");;
+
+
+    public void showmodwiki(ScaledResolution scaledRes){
+
+            Minecraft mc = Minecraft.getMinecraft();
+            GlStateManager.disableDepth();
+            GlStateManager.depthMask(false);
+            GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
+            GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+            GlStateManager.disableAlpha();
+            mc.getTextureManager().bindTexture(WIKI_image);
+            Tessellator tessellator = Tessellator.getInstance();
+            BufferBuilder bufferbuilder = tessellator.getBuffer();
+            bufferbuilder.begin(7, DefaultVertexFormats.POSITION_TEX);
+            bufferbuilder.pos(0.0D, (double) scaledRes.getScaledHeight(), -90.0D).tex(0.0D, 1.0D).endVertex();
+            bufferbuilder.pos((double) scaledRes.getScaledWidth(), (double) scaledRes.getScaledHeight(), -90.0D).tex(1.0D, 1.0D).endVertex();
+            bufferbuilder.pos((double) scaledRes.getScaledWidth(), 0.0D, -90.0D).tex(1.0D, 0.0D).endVertex();
+            bufferbuilder.pos(0.0D, 0.0D, -90.0D).tex(0.0D, 0.0D).endVertex();
+            tessellator.draw();
+            GlStateManager.depthMask(true);
+            GlStateManager.enableDepth();
+            GlStateManager.enableAlpha();
+            GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+
+    }
 
     @SideOnly(Side.CLIENT)
     @SubscribeEvent
     public void guievent(RenderGameOverlayEvent event){
+        if(mapshow.isKeyDown()){
+            showmodwiki(event.getResolution());
+        }
         if(event.getType().equals(RenderGameOverlayEvent.ElementType.HOTBAR)){
             EntityPlayerSP player = Minecraft.getMinecraft().player;
             if(player.isHandActive()&& !player.capabilities.isCreativeMode && player.getActiveItemStack().getItem() instanceof Itimetoreload && !(event instanceof  RenderGameOverlayEvent.Post)) {

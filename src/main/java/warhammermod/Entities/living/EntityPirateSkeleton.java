@@ -1,5 +1,6 @@
 package warhammermod.Entities.living;
 
+
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -33,6 +34,8 @@ import warhammermod.util.utils;
 import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.List;
+
+import static warhammermod.util.confighandler.confighandler.Config_enable.Mob_enchanted_equipment;
 
 public class EntityPirateSkeleton extends AbstractSkeleton {
     public EntityPirateSkeleton(World worldIn)
@@ -134,10 +137,8 @@ public class EntityPirateSkeleton extends AbstractSkeleton {
     {
         livingdata = super.onInitialSpawn(difficulty, livingdata);
         this.setEquipmentBasedOnDifficulty(difficulty);
-        this.setEnchantmentBasedOnDifficulty(difficulty);
+        if(Mob_enchanted_equipment)this.setEnchantmentBasedOnDifficulty(difficulty);
         this.setCombatTask();
-
-
         return livingdata;
     }
 

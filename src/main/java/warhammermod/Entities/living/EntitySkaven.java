@@ -42,17 +42,23 @@ import warhammermod.Items.Ranged.slingtemplate;
 import warhammermod.util.Handler.Loottable;
 import warhammermod.util.Handler.inithandler.Itemsinit;
 import warhammermod.util.Handler.soundhandler.sounds;
+import warhammermod.util.Itimetoreload;
 import warhammermod.util.utils;
 import warhammermod.worldgen.MapGenDwarfVillage;
+
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import static warhammermod.util.confighandler.confighandler.Config_enable.Mob_enchanted_equipment;
+import static warhammermod.util.confighandler.confighandler.Config_enable.Skaven_ranged_dropchance;
 import static warhammermod.util.reference.*;
 
 
 public class EntitySkaven extends EntityMob implements IRangedAttackMob {
+
+
 
     private static final DataParameter<Boolean> SWINGING_ARMS = EntityDataManager.<Boolean>createKey(EntitySkaven.class, DataSerializers.BOOLEAN);
     public static final DataParameter<Float> Slingprogress = EntityDataManager.createKey(EntitySkaven.class, DataSerializers.FLOAT);
@@ -60,12 +66,11 @@ public class EntitySkaven extends EntityMob implements IRangedAttackMob {
 
 
     public static final DataParameter<String> SkavenType = EntityDataManager.<String>createKey(EntitySkaven.class,DataSerializers.STRING);
-    private static ArrayList<String> Types = new ArrayList<String>(Arrays.asList(slave,clanrat,stormvermin,gutter_runner,globadier,ratling_gunner));
-    private ArrayList<Float> SkavenSize = new ArrayList<Float>(Arrays.asList(1.1F,1.2F,1.3F,1.2F,1.2F,1.2F));
-    private ArrayList<Integer> Spawnchance = new ArrayList<Integer>(Arrays.asList(38,0,0,0,0,0));//3
-    //private ArrayList<Integer> Spawnchance = new ArrayList<Integer>(Arrays.asList(38,27,15,7,4,4));//3
-    private ArrayList<Float> reinforcementchance = new ArrayList<Float>(Arrays.asList(0.08F,0.1F,0.14F,0F,0.08F,0.11F));
-    private ArrayList<Integer> firerate = new ArrayList<Integer>(Arrays.asList(28,38,0,0,37,6));
+    private static final ArrayList<String> Types = new ArrayList<String>(Arrays.asList(slave,clanrat,stormvermin,gutter_runner,globadier,ratling_gunner));
+    private final ArrayList<Float> SkavenSize = new ArrayList<Float>(Arrays.asList(1.1F,1.2F,1.3F,1.2F,1.2F,1.2F));
+    private final ArrayList<Integer> Spawnchance = new ArrayList<Integer>(Arrays.asList(38,27,15,7,4,4));//3
+    private final ArrayList<Float> reinforcementchance = new ArrayList<Float>(Arrays.asList(0.08F,0.1F,0.14F,0F,0.08F,0.11F));
+    private final ArrayList<Integer> firerate = new ArrayList<Integer>(Arrays.asList(28,38,0,0,37,6));
     public static ItemStack[][][] SkavenEquipment =  {{{utils.getRandomspear(4)},{new ItemStack(Itemsinit.sling)}},
                                             {{utils.getRandomsword(4),new ItemStack(Itemsinit.SKAVEN_SHIELD)},{new ItemStack(Itemsinit.WarpLock_Jezzail)}},
                                             {{utils.getRandomHalberd(4)},{utils.getRandomsword(5),new ItemStack(Itemsinit.SKAVEN_SHIELD)}},
@@ -82,6 +87,13 @@ public class EntitySkaven extends EntityMob implements IRangedAttackMob {
         fixgame=true;
     }
 
+    protected void dropEquipment(boolean wasRecentlyHit, int lootingModifier)
+    {
+        int i=0;
+        if(this.getHeldItemMainhand().getItem() instanceof Itimetoreload)i = Skaven_ranged_dropchance;
+        super.dropEquipment(wasRecentlyHit, i + lootingModifier);
+    }
+
     protected ResourceLocation getLootTable() {return Loottable.Skaven;}
 
     //private ResourceLocation getloottablefromtype(){ }
@@ -91,7 +103,7 @@ public class EntitySkaven extends EntityMob implements IRangedAttackMob {
     {
         this.dataManager.set(SkavenType,setSkavenType());
         this.setEquipmentBasedOnDifficulty(difficulty);
-        this.setEnchantmentBasedOnDifficulty(difficulty);
+        if(Mob_enchanted_equipment)this.setEnchantmentBasedOnDifficulty(difficulty);
         setCombatTask();
         setSize(0.6F,getSkavenSize()+0.5F);
 

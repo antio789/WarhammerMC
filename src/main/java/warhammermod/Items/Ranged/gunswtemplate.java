@@ -1,5 +1,6 @@
 package warhammermod.Items.Ranged;
 
+
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -217,6 +218,7 @@ public class gunswtemplate extends ItemSword implements Itimetoreload {
 
     public boolean canApplyAtEnchantingTable(ItemStack stack, net.minecraft.enchantment.Enchantment enchantment)
     {
+
         return enchantment.type == EnumEnchantmentType.WEAPON || enchantment.type == EnumEnchantmentType.BREAKABLE || enchantment.type == EnumEnchantmentType.BOW;
     }
 

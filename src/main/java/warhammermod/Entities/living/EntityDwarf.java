@@ -1,6 +1,7 @@
 package warhammermod.Entities.living;
 
 import com.google.common.base.Predicate;
+
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -55,9 +56,12 @@ import warhammermod.Entities.living.Emanager.*;
 import warhammermod.util.Handler.inithandler.Itemsinit;
 import warhammermod.util.utils;
 
+
 import javax.annotation.Nullable;
 import java.util.Locale;
 import java.util.Random;
+
+import static warhammermod.util.confighandler.confighandler.Config_enable.Mob_enchanted_equipment;
 
 public class EntityDwarf extends EntityAgeable implements INpc, IMerchant
 {
@@ -814,7 +818,7 @@ public class EntityDwarf extends EntityAgeable implements INpc, IMerchant
         this.setAdditionalAItasks();
         this.populateBuyingList();
         this.setEquipmentBasedOnprofession(getProfession());
-        this.setEnchantmentBasedOnDifficulty(p_190672_1_);
+        if(Mob_enchanted_equipment)this.setEnchantmentBasedOnDifficulty(p_190672_1_);
         return p_190672_2_;
 
     }

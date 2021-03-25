@@ -10,6 +10,13 @@ public class confighandler {
     public static class Config_enable {
         @Config.RequiresMcRestart
         public static boolean generation_enabled = true;
+        @Config.Comment("If warhammer mobs spawn with enchanted items. Disabled by default to prevent crashing issue \n with enchantement mods")
+        @Config.RequiresMcRestart
+        public static boolean Mob_enchanted_equipment = false;
+        @Config.Comment("chance for the skaven to drop their ranged weapons: 100 always, 0 minecraft default")
+        @Config.RangeInt(min = 0, max = 100)
+        @Config.RequiresMcRestart
+        public static int Skaven_ranged_dropchance = 100;
         @Config.RequiresMcRestart
         public static boolean spears_included = true;
         @Config.RequiresMcRestart

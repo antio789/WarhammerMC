@@ -24,10 +24,12 @@ import warhammermod.Items.Render.*;
 @SideOnly(Side.CLIENT)
 public class clientproxy extends commonproxy{
     public static final KeyBinding horsedown = new KeyBinding("pegasus down", KeyConflictContext.IN_GAME, Keyboard.KEY_W,"Warhammermod");
+    public static final KeyBinding mapshow = new KeyBinding("show mod info", KeyConflictContext.IN_GAME, Keyboard.KEY_M,"Warhammermod");
     public static int repeater_value=0;
 
     public void registerclient(){
         ClientRegistry.registerKeyBinding(horsedown);
+        ClientRegistry.registerKeyBinding(mapshow);
     }
 
     public void registryitemrenderer(Item item, int meta, String id){ }

@@ -16,13 +16,13 @@
     },
     "G":
     {
-      "item": "minecraft:tnt"
+      "item": "minecraft:gunpowder"
     }
   },
 
   "result":
   {
     "item": "warhammermod:grenade",
-    "count": 5
+    "count": 1
   }
 }
