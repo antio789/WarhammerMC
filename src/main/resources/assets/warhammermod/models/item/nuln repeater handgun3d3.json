@@ -1,0 +1,226 @@
+{
+  "__comment": "Model generated using MrCrayfish's Model Creator (https://mrcrayfish.com/tools?id=mc)",
+  "textures": {
+    "barrel": "warhammermod:items/repeater"
+  },
+  "display": {
+    "gui": {
+      "rotation": [ 30, 45, 0 ],
+      "translation": [ 0, 0, 0 ],
+      "scale": [ 0.8, 0.8, 0.8 ]
+    },
+    "ground": {
+      "rotation": [ 0, 0, 0 ],
+      "translation": [ 0, 3, 0 ],
+      "scale": [ 0.7, 0.7, 0.7 ]
+    },
+    "fixed": {
+      "rotation": [ 0, 180, 0 ],
+      "translation": [ 0, 0, 0 ],
+      "scale": [ 1, 1, 1 ]
+    },
+    "head": {
+      "rotation": [ 0, 180, 0 ],
+      "translation": [ 0, 0, 0 ],
+      "scale": [ 1, 1, 1 ]
+    },
+    "thirdperson_righthand": {
+      "rotation": [ 0, 0, 0 ],
+      "translation": [ 0, 5, 0.5 ],
+      "scale": [ 0.95, 0.95, 0.95 ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [ 0, 0, 0 ],
+      "translation": [ 0, 5, 0.5 ],
+      "scale": [ 0.95, 0.95, 0.95 ]
+    },
+    "firstperson_righthand": {
+      "rotation": [ 10, 0, 0 ],
+      "translation": [ 1, 5, 0 ],
+      "scale": [ 0.8, 0.8, 0.8 ]
+    },
+    "firstperson_lefthand": {
+      "rotation": [ 10, 0, 0 ],
+      "translation": [ 1, 5, 0 ],
+      "scale": [ 0.8, 0.8, 0.8 ]
+    }
+  },
+  "elements": [
+    {
+      "name": "stock1",
+      "from": [ 8, -1, 14 ],
+      "to": [ 9, 1, 16 ],
+      "faces": {
+        "north": { "texture": "#barrel", "uv": [ 0, 11, 1, 13 ] },
+        "east": { "texture": "#barrel", "uv": [ 1, 11, 3, 13 ] },
+        "south": { "texture": "#barrel", "uv": [ 0, 11, 1, 13 ] },
+        "west": { "texture": "#barrel", "uv": [ 2, 11, 4, 13 ] },
+        "up": { "texture": "#barrel", "uv": [ 0, 11, 1, 13 ] },
+        "down": { "texture": "#barrel", "uv": [ 0, 11, 1, 13 ] }
+      }
+    },
+    {
+      "name": "handle1",
+      "from": [ 8, 0, 6 ],
+      "to": [ 9, 1, 14 ],
+      "faces": {
+        "north": { "texture": "#barrel", "uv": [ 0, 11, 1, 12 ] },
+        "east": { "texture": "#barrel", "uv": [ 0, 11, 8, 12 ] },
+        "west": { "texture": "#barrel", "uv": [ 0, 13, 8, 14 ] },
+        "up": { "texture": "#barrel", "uv": [ 6, 8, 7, 16 ] },
+        "down": { "texture": "#barrel", "uv": [ 6, 8, 7, 16 ] }
+      }
+    },
+    {
+      "name": "handle2",
+      "from": [ 8, 1, 11 ],
+      "to": [ 9, 2, 13 ],
+      "faces": {
+        "east": { "texture": "#barrel", "uv": [ 4, 12, 6, 13 ] },
+        "south": { "texture": "#barrel", "uv": [ 4, 11, 5, 12 ] },
+        "west": { "texture": "#barrel", "uv": [ 4, 13, 6, 14 ] },
+        "up": { "texture": "#barrel", "uv": [ 3, 12, 4, 14 ] }
+      }
+    },
+    {
+      "name": "barrel_base",
+      "from": [ 6.5, 1, 9 ],
+      "to": [ 10.5, 5, 11 ],
+      "faces": {
+        "north": { "texture": "#barrel", "uv": [ 11, 0, 15, 4 ] },
+        "east": { "texture": "#barrel", "uv": [ 11, 0, 13, 4 ] },
+        "south": { "texture": "#barrel", "uv": [ 12, 0, 16, 4 ] },
+        "west": { "texture": "#barrel", "uv": [ 12, 1, 14, 5 ] },
+        "up": { "texture": "#barrel", "uv": [ 12, 0, 16, 2 ] },
+        "down": { "texture": "#barrel", "uv": [ 12, 4, 16, 6 ] }
+      }
+    },
+    {
+      "name": "barrel1",
+      "from": [ 8, 4, 0 ],
+      "to": [ 9, 5, 9 ],
+      "faces": {
+        "north": { "texture": "#barrel", "uv": [ 0, 0, 1, 1 ] },
+        "east": { "texture": "#barrel", "uv": [ 2, 0, 11, 1 ] },
+        "west": { "texture": "#barrel", "uv": [ 2, 0, 11, 1 ] },
+        "up": { "texture": "#barrel", "uv": [ 0, 2, 1, 11 ] },
+        "down": { "texture": "#barrel", "uv": [ 0, 2, 1, 11 ] }
+      }
+    },
+    {
+      "name": "barrel2",
+      "from": [ 7, 3, 0 ],
+      "to": [ 8, 4, 9 ],
+      "rotation": { "origin": [ 8.0, 4.0, 8.0 ], "axis": "z", "angle": -22.5 },
+      "faces": {
+        "north": { "texture": "#barrel", "uv": [ 0, 0, 1, 1 ] },
+        "east": { "texture": "#barrel", "uv": [ 1, 0, 10, 1 ] },
+        "west": { "texture": "#barrel", "uv": [ 1, 0, 10, 1 ] },
+        "up": { "texture": "#barrel", "uv": [ 0, 1, 1, 10 ] },
+        "down": { "texture": "#barrel", "uv": [ 0, 1, 1, 10 ] }
+      }
+    },
+    {
+      "name": "barrel4",
+      "from": [ 8, 1, 0 ],
+      "to": [ 9, 2, 9 ],
+      "faces": {
+        "north": { "texture": "#barrel", "uv": [ 0, 0, 1, 1 ] },
+        "east": { "texture": "#barrel", "uv": [ 1, 0, 10, 1 ] },
+        "west": { "texture": "#barrel", "uv": [ 1, 0, 10, 1 ] },
+        "up": { "texture": "#barrel", "uv": [ 0, 1, 1, 10 ] },
+        "down": { "texture": "#barrel", "uv": [ 0, 1, 1, 10 ] }
+      }
+    },
+    {
+      "name": "barrel3",
+      "from": [ 7, 2, 0 ],
+      "to": [ 8, 3, 9 ],
+      "rotation": { "origin": [ 8.0, 2.0, 8.0 ], "axis": "z", "angle": 22.5 },
+      "faces": {
+        "north": { "texture": "#barrel", "uv": [ 0, 0, 1, 1 ] },
+        "east": { "texture": "#barrel", "uv": [ 2, 0, 11, 1 ] },
+        "west": { "texture": "#barrel", "uv": [ 1, 0, 10, 1 ] },
+        "up": { "texture": "#barrel", "uv": [ 0, 1, 1, 10 ] },
+        "down": { "texture": "#barrel", "uv": [ 0, 1, 1, 10 ] }
+      }
+    },
+    {
+      "name": "barrel5",
+      "from": [ 9, 2, 0 ],
+      "to": [ 10, 3, 9 ],
+      "rotation": { "origin": [ 9.0, 2.0, 8.0 ], "axis": "z", "angle": -22.5 },
+      "faces": {
+        "north": { "texture": "#barrel", "uv": [ 0, 0, 1, 1 ] },
+        "east": { "texture": "#barrel", "uv": [ 1, 0, 10, 1 ] },
+        "west": { "texture": "#barrel", "uv": [ 1, 0, 10, 1 ] },
+        "up": { "texture": "#barrel", "uv": [ 0, 2, 1, 11 ] },
+        "down": { "texture": "#barrel", "uv": [ 0, 1, 1, 10 ] }
+      }
+    },
+    {
+      "name": "barrel6",
+      "from": [ 9, 3, 0 ],
+      "to": [ 10, 4, 9 ],
+      "rotation": { "origin": [ 9.0, 4.0, 8.0 ], "axis": "z", "angle": 22.5 },
+      "faces": {
+        "north": { "texture": "#barrel", "uv": [ 0, 0, 1, 1 ] },
+        "east": { "texture": "#barrel", "uv": [ 2, 0, 11, 1 ] },
+        "west": { "texture": "#barrel", "uv": [ 1, 0, 10, 1 ] },
+        "up": { "texture": "#barrel", "uv": [ 0, 2, 1, 11 ] },
+        "down": { "texture": "#barrel", "uv": [ 0, 1, 1, 10 ] }
+      }
+    },
+    {
+      "name": "barrel_holder",
+      "from": [ 6.5, 0.6, 1 ],
+      "to": [ 10.5, 4.8, 2 ],
+      "rotation": { "origin": [ 8.0, 3.0, 8.0 ], "axis": "z", "angle": 45 },
+      "faces": {
+        "north": { "texture": "#barrel", "uv": [ 10, 11, 14, 15.2 ] },
+        "east": { "texture": "#barrel", "uv": [ 9, 11, 10, 15.2 ] },
+        "south": { "texture": "#barrel", "uv": [ 10, 11, 14, 15.2 ] },
+        "west": { "texture": "#barrel", "uv": [ 9, 11, 10, 15.2 ] },
+        "up": { "texture": "#barrel", "uv": [ 10, 12, 14, 13 ] },
+        "down": { "texture": "#barrel", "uv": [ 10, 14, 14, 15 ] }
+      }
+    },
+    {
+      "name": "barrel_holder2",
+      "from": [ 6.5, 0.6, 5 ],
+      "to": [ 10.5, 4.8, 6 ],
+      "rotation": { "origin": [ 8.0, 3.0, 8.0 ], "axis": "z", "angle": 45 },
+      "faces": {
+        "north": { "texture": "#barrel", "uv": [ 10, 11, 14, 15.2 ] },
+        "east": { "texture": "#barrel", "uv": [ 9, 11, 10, 15.2 ] },
+        "south": { "texture": "#barrel", "uv": [ 10, 11, 14, 15.2 ] },
+        "west": { "texture": "#barrel", "uv": [ 9, 11, 10, 15.2 ] },
+        "up": { "texture": "#barrel", "uv": [ 11, 12, 15, 13 ] },
+        "down": { "texture": "#barrel", "uv": [ 10, 12, 14, 13 ] }
+      }
+    },
+    {
+      "name": "barrel_base2",
+      "from": [ 7, 1, 11 ],
+      "to": [ 10, 4, 12 ],
+      "faces": {
+        "east": { "texture": "#barrel", "uv": [ 2, 12, 3, 15 ] },
+        "south": { "texture": "#barrel", "uv": [ 3, 12, 6, 15 ] },
+        "west": { "texture": "#barrel", "uv": [ 3, 12, 4, 15 ] },
+        "up": { "texture": "#barrel", "uv": [ 2, 12, 5, 13 ] },
+        "down": { "texture": "#barrel", "uv": [ 2, 12, 5, 13 ] }
+      }
+    },
+    {
+      "name": "flint",
+      "from": [ 8, 4, 11 ],
+      "to": [ 9, 5, 12 ],
+      "faces": {
+        "east": { "texture": "#barrel", "uv": [ 14, 9, 15, 10 ] },
+        "south": { "texture": "#barrel", "uv": [ 14, 9, 15, 10 ] },
+        "west": { "texture": "#barrel", "uv": [ 14, 9, 15, 10 ] },
+        "up": { "texture": "#barrel", "uv": [ 14, 9, 15, 10 ] }
+      }
+    }
+  ]
+}
