@@ -30,6 +30,7 @@ import org.apache.logging.log4j.Logger;
 import warhammermod.Items.melee.SmallShieldTemplate;
 import warhammermod.utils.inithandler.IReloadItem;
 import warhammermod.utils.inithandler.ItemsInit;
+import warhammermod.utils.inithandler.ModRegistrerevents;
 import warhammermod.utils.inithandler.WarhammermodRegistry;
 
 import java.util.stream.Collectors;
@@ -63,6 +64,8 @@ public class main
         // some preinit code
         LOGGER.info("HELLO FROM PREINIT");
         LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
+        ModRegistrerevents.preinit();
+
         //GlobalEntityTypeAttributes.getSupplier(Entityinit.PEGASUS).createInstance()
            //     ;.put(EntityType.HORSE, AbstractHorseEntity.createBaseHorseAttributes().build());
 

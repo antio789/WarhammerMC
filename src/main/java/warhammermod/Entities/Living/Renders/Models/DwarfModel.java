@@ -1,0 +1,215 @@
+package warhammermod.Entities.Living.Renders.Models;
+
+
+import com.google.common.collect.ImmutableList;
+import com.mojang.blaze3d.matrix.MatrixStack;
+import net.minecraft.client.renderer.entity.model.IHasArm;
+import net.minecraft.client.renderer.entity.model.IHasHead;
+import net.minecraft.client.renderer.entity.model.SegmentedModel;
+import net.minecraft.client.renderer.model.ModelRenderer;
+import net.minecraft.entity.monster.AbstractIllagerEntity;
+import net.minecraft.util.HandSide;
+import net.minecraft.util.math.MathHelper;
+import warhammermod.Entities.Living.DwarfEntity;
+
+
+public class DwarfModel<T extends DwarfEntity> extends SegmentedModel<T> implements IHasArm, IHasHead
+{
+    /** The head box of the VillagerModel */
+    public ModelRenderer head;
+    /** The body of the VillagerModel */
+    public ModelRenderer villagerBody;
+    /** The arms of the VillagerModel */
+    public ModelRenderer villagerArms;
+    /** The right leg of the VillagerModel */
+    public ModelRenderer rightVillagerLeg;
+    /** The left leg of the VillagerModel */
+    public ModelRenderer leftVillagerLeg;
+    public ModelRenderer villagerNose;
+    public ModelRenderer villagerbeard;
+    public ModelRenderer villagermustache1;
+    public ModelRenderer rightArm;
+    public ModelRenderer leftArm;
+
+    protected ModelRenderer hat;
+    protected ModelRenderer hat2;
+
+
+    public DwarfModel(float scale)
+    {
+        this(scale, 0.0F, 128, 128);
+    }
+
+    public DwarfModel(float scale, float p_i1164_2_, int width, int height)
+    {
+        this.head = (new ModelRenderer(this)).setTexSize(width, height);
+        this.head.setPos(0.0F, 0.0F + p_i1164_2_, 0.0F);
+        this.head.setTexSize(0, 0).addBox(-4.0F, -6.0F, -4.0F, 8, 10, 8, scale);
+        this.hat = (new ModelRenderer(this)).setTexSize(width, height);
+        this.hat.setPos(0.0F, 0.0F, 0.0F);
+        this.hat.setTexSize(65, 0).addBox(-4.0F, -6.0F, -4.0F, 8.0F, 10.0F, 8.0F, scale + 0.5F);
+        this.hat2 = (new ModelRenderer(this)).setTexSize(width, height);
+        this.hat2.setPos(0.0F, 0.0F, 0.0F);
+        this.hat2.setTexSize(65, 25).addBox(-8.0F, -8.0F, -3.0F, 16.0F, 16.0F, 1.0F, scale);
+        this.hat2.xRot = (-(float) Math.PI / 2F);
+        this.hat.addChild(this.hat2);
+        this.head.addChild(hat);
+
+        this.villagerNose = (new ModelRenderer(this)).setTexSize(width, height);
+        this.villagerNose.setPos(0.0F, p_i1164_2_ - 2.0F, 0.0F);
+        this.villagerNose.setTexSize(24, 0).addBox(-1.0F, 2.0F, -6.0F, 2, 4, 2, scale);
+        this.villagerbeard= (new ModelRenderer(this)).setTexSize(width,height);
+        this.villagerbeard.setPos(0.0F, p_i1164_2_ - 2.0F, 0.0F);
+        this.villagerbeard.setTexSize(36,38).addBox(-4.0F,6.0F,-5.0F,8,6,1,0);
+        this.villagermustache1= (new ModelRenderer(this)).setTexSize(width,height);
+        this.villagermustache1.setPos(0.0F, p_i1164_2_ - 2.0F, 0.0F);
+        this.villagermustache1.setTexSize(36,38).addBox(-4.0F,3.0F,-5.0F,2,3,1,0);
+        this.villagermustache1.setTexSize(36,38).addBox(2.0F,3.0F,-5.0F,2,3,1,0);
+        this.villagermustache1.setTexSize(36,38).addBox(-2.0F,3.0F,-5.0F,1,1,1,0);
+        this.villagermustache1.setTexSize(36,38).addBox(1.0F,3.0F,-5.0F,1,1,1,0);
+        this.head.addChild(this.villagerbeard);
+        this.head.addChild(this.villagermustache1);
+        this.head.addChild(this.villagerNose);
+        this.villagerBody = (new ModelRenderer(this)).setTexSize(width, height);
+        this.villagerBody.setPos(0.0F, 0.0F + p_i1164_2_, 0.0F);
+        this.villagerBody.setTexSize(0, 19).addBox(-5.0F, 4.0F, -3.0F, 10, 10, 7, scale);
+        this.villagerBody.setTexSize(0, 38).addBox(-5.0F, 4.0F, -3.0F, 10, 16, 7, scale + 0.5F);
+        this.villagerArms = (new ModelRenderer(this)).setTexSize(width, height);
+        this.villagerArms.setPos(0.0F, 0.0F + p_i1164_2_ + 2.0F, 0.0F);
+        this.villagerArms.setTexSize(40, 16).addBox(-8.0F, 1.0F, 1.0F, 4, 8, 4, scale+0.009F);
+        this.villagerArms.setTexSize(40, 16).addBox(4.0F, 1.0F, 1.0F, 4, 8, 4, scale+0.009F);
+        this.villagerArms.setTexSize(36, 29).addBox(-4.0F, 5.0F, 1.0F, 8, 4, 4, scale+0.009F);
+        this.rightVillagerLeg = (new ModelRenderer(this, 34, 0)).setTexSize(width, height);
+        this.rightVillagerLeg.setPos(-2.0F, 12.0F + p_i1164_2_, 0.0F);
+        this.rightVillagerLeg.addBox(-3F, 2.0F, -2.0F, 5, 10, 5, scale);
+        this.leftVillagerLeg = (new ModelRenderer(this, 34, 0)).setTexSize(width, height);
+        this.leftVillagerLeg.mirror = true;
+        this.leftVillagerLeg.setPos(2.0F, 12.0F + p_i1164_2_, 0.0F);
+        this.leftVillagerLeg.addBox(-2F, 2.0F, -2.0F, 5, 10, 5, scale);
+        //this.bipedHeadwear = new ModelRenderer(this, 32, 0);
+        //this.bipedHeadwear.addBox()(-4.0F, -8.0F, -4.0F, 8, 8, 8, scale + 0.5F);
+        //this.bipedHeadwear.setPos();(0.0F, 0.0F + p_i1164_2_, 0.0F);
+        this.rightArm = (new ModelRenderer(this, 35, 46)).setTexSize(width, height);
+        this.rightArm.addBox(-3F, -2F, 2F, 4, 10, 4, scale);
+        this.rightArm.setPos(-5.0F, 2.0F + p_i1164_2_, 0.0F);
+        this.leftArm = (new ModelRenderer(this, 35, 46)).setTexSize(width, height);
+        this.leftArm.mirror = true;
+        this.leftArm.addBox(-1.0F, 2.0F, -2F, 4, 10, 4, scale);
+        this.leftArm.setPos(5.0F, 2.0F + p_i1164_2_, 0.0F);
+    }
+
+
+    public Iterable<ModelRenderer> parts() {
+        return ImmutableList.of(this.head, this.villagerBody, this.rightVillagerLeg, this.leftVillagerLeg, this.villagerArms, this.rightArm, this.leftArm);
+    }
+    /**
+     * Sets the models various rotation angles then renders the model.
+     */
+
+
+    /**
+    public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale)
+    {
+        this.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, entityIn);
+        this.head.render(scale);
+        this.villagerBody.render(scale);
+        this.rightVillagerLeg.render(scale);
+        this.leftVillagerLeg.render(scale);
+
+        if(entityIn instanceof EntityDwarf){
+        EntityDwarf entityDwarf = (EntityDwarf)entityIn;
+        if (entityDwarf.getArmPose()== AbstractIllager.IllagerArmPose.CROSSED)
+        {
+            this.villagerArms.render(scale+0.009F);
+
+        }
+        else
+        {
+
+            this.rightArm.render(scale+0.009F);
+            this.leftArm.render(scale+0.009F);
+        }
+        }
+    }
+
+    /**
+     * Sets the model's various rotation angles. For bipeds, par1 and par2 are used for animating the movement of arms
+     * and legs, where par1 represents the time(so that arms and legs swing back and forth) and par2 represents how
+     * "far" arms and legs can swing at most.
+     */
+
+    public void setupAnim(DwarfEntity entityIn,float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+        boolean flag = entityIn.getUnhappyCounter()>0;
+
+        this.head.yRot = netHeadYaw * 0.017453292F;
+        this.head.xRot = headPitch * 0.017453292F;
+        if (flag) {
+            this.head.zRot = 0.3F * MathHelper.sin(0.45F * ageInTicks);
+            this.head.xRot = 0.4F;
+        } else {
+            this.head.zRot = 0.0F;
+        }
+        this.villagerArms.yRot = 3.0F;
+        this.villagerArms.yRot = -1.0F;
+        this.villagerArms.xRot = -0.75F;
+        this.rightVillagerLeg.xRot = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount * 0.5F;
+        this.leftVillagerLeg.xRot = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount * 0.5F;
+        this.rightVillagerLeg.yRot = 0.0F;
+        this.leftVillagerLeg.yRot = 0.0F;
+
+
+            DwarfEntity entityDwarf = (DwarfEntity) entityIn;
+            if (entityDwarf.getArmPose()== AbstractIllagerEntity.ArmPose.ATTACKING || entityDwarf.isBattleready())
+            {
+                float f = MathHelper.sin(this.attackTime * (float) Math.PI);
+                float f1 = MathHelper.sin((1.0F - (1.0F - this.attackTime) * (1.0F - this.attackTime)) * (float) Math.PI);
+                this.rightArm.zRot = 0.0F;
+                this.leftArm.zRot = 0.0F;
+                this.rightArm.yRot = 0.15707964F;
+                this.leftArm.yRot = -0.15707964F;
+
+                if(entityDwarf.getProfession().getName().equals("slayer")){
+                    this.rightArm.xRot = -1.8849558F + MathHelper.cos(ageInTicks * 0.09F) * 0.15F;
+                    this.leftArm.xRot = -1.8849558F + MathHelper.cos(ageInTicks * 0.09F) * 0.15F;
+                    this.rightArm.xRot += f * 2.2F - f1 * 0.4F;
+                    this.leftArm.xRot += f * 2.2F - f1 * 0.4F;
+                }
+                else if ((entityIn).getMainArm() == HandSide.RIGHT)
+                {
+                    this.rightArm.xRot = -1.8849558F + MathHelper.cos(ageInTicks * 0.09F) * 0.15F;
+                    this.leftArm.xRot = -0.0F + MathHelper.cos(ageInTicks * 0.19F) * 0.5F;
+                    this.rightArm.xRot += f * 2.2F - f1 * 0.4F;
+                    this.leftArm.xRot += f * 1.2F - f1 * 0.4F;
+                }
+                else
+                {
+                    this.rightArm.xRot = -0.0F + MathHelper.cos(ageInTicks * 0.19F) * 0.5F;
+                    this.leftArm.xRot = -1.8849558F + MathHelper.cos(ageInTicks * 0.09F) * 0.15F;
+                    this.rightArm.xRot += f * 1.2F - f1 * 0.4F;
+                    this.leftArm.xRot += f * 2.2F - f1 * 0.4F;
+                }
+
+                this.rightArm.zRot += MathHelper.cos(ageInTicks * 0.09F) * 0.05F + 0.05F;
+                this.leftArm.zRot -= MathHelper.cos(ageInTicks * 0.09F) * 0.05F + 0.05F;
+                this.rightArm.xRot += MathHelper.sin(ageInTicks * 0.067F) * 0.05F;
+                this.leftArm.xRot -= MathHelper.sin(ageInTicks * 0.067F) * 0.05F;
+            }
+
+        boolean attacking = (entityIn.getArmPose() == AbstractIllagerEntity.ArmPose.ATTACKING);
+        this.villagerArms.visible = !attacking;
+        this.leftArm.visible = attacking;
+        this.rightArm.visible = attacking;
+
+    }
+
+    private ModelRenderer getArm(HandSide p_191216_1_) {
+        return p_191216_1_ == HandSide.LEFT ? this.leftArm : this.rightArm;
+    }
+    public ModelRenderer getHead() {
+        return this.head;
+    }
+
+    public void translateToHand(HandSide p_225599_1_, MatrixStack p_225599_2_) {
+        this.getArm(p_225599_1_).translateAndRotate(p_225599_2_);
+    }
+}

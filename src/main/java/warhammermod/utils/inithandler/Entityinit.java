@@ -2,9 +2,11 @@ package warhammermod.utils.inithandler;
 
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.merchant.villager.VillagerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.SpawnEggItem;
 import net.minecraft.util.ResourceLocation;
+import warhammermod.Entities.Living.DwarfEntity;
 import warhammermod.Entities.Living.PegasusEntity;
 import warhammermod.Entities.Living.SkavenEntity;
 import warhammermod.Entities.Projectile.*;
@@ -54,7 +56,11 @@ public class Entityinit {
     public static EntityType<SkavenEntity> SKAVEN = EntityType.Builder.<SkavenEntity>of(SkavenEntity::new, EntityClassification.CREATURE)
             .setTrackingRange(64).clientTrackingRange(10).setUpdateInterval(1)
             .setShouldReceiveVelocityUpdates(true).sized(1.3964844F, 1.6F)
-            .build(location("skaven").toString());;
+            .build(location("skaven").toString());
+
+     public static EntityType<DwarfEntity> DWARF = EntityType.Builder.<DwarfEntity>of(DwarfEntity::new, EntityClassification.MISC)
+            .sized(0.6F, 1.7F).clientTrackingRange(10).build(location("dwarf").toString());
+    public static Item DWARF_SPAWN_EGG = new SpawnEggItem(DWARF,10528073,15528173,(new Item.Properties()).tab(reference.warhammer)).setRegistryName("dwarf_egg");
 
 
 

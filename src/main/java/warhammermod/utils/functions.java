@@ -3,12 +3,18 @@ package warhammermod.utils;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.util.ResourceLocation;
 import warhammermod.utils.inithandler.ItemsInit;
 
 import java.util.Random;
 import java.util.Scanner;
 
 public class functions {
+    public static ResourceLocation location(String name)
+    {
+        return new ResourceLocation(reference.modid, name);
+    }
+
     static int timer;
     public static void printer(Object object){
         if (timer==0){
@@ -36,5 +42,25 @@ public class functions {
     public static ItemStack getRandomHalberd(int maxlevel4){
         int random = new Random().nextInt(maxlevel4);
         return new ItemStack(halberd[random]);
+    }
+    public static Item getRandomShield(){
+        int shield = new Random().nextInt(4);
+        switch(shield){
+            case 0:return ItemsInit.Dwarf_shield;
+            case 1:return ItemsInit.Empire_shield;
+            case 2:return ItemsInit.High_Elf_Shield;
+            default:return ItemsInit.DArk_Elf_shield;
+        }
+    }
+    public static Item getRandomarmor(int part){
+        int random = new Random().nextInt(2);
+        if(random==0){if(part<1)return ItemsInit.DIAMOND_CHAINMAIL_LEGGINGS;else return ItemsInit.DIAMOND_CHAINMAIL_BOOTS;}
+        else{if(part<1)return ItemsInit.DIAMOND_CHAINMAIL_HELMET;else return ItemsInit.DIAMOND_CHAINMAIL_CHESTPLATE;}
+    }
+    public static Item[] skulls = {Items.SKELETON_SKULL, Items.CREEPER_HEAD, Items.ZOMBIE_HEAD, Items.PLAYER_HEAD, Items.DRAGON_HEAD};
+
+    public static Item getrandomskull(){
+        int random = new Random().nextInt(skulls.length);
+        return skulls[random];
     }
 }
