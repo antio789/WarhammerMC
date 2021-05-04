@@ -44,41 +44,41 @@ public class DwarfModel<T extends DwarfEntity> extends SegmentedModel<T> impleme
     {
         this.head = (new ModelRenderer(this)).setTexSize(width, height);
         this.head.setPos(0.0F, 0.0F + p_i1164_2_, 0.0F);
-        this.head.setTexSize(0, 0).addBox(-4.0F, -6.0F, -4.0F, 8, 10, 8, scale);
+        this.head.texOffs(0, 0).addBox(-4.0F, -6.0F, -4.0F, 8, 10, 8, scale);
         this.hat = (new ModelRenderer(this)).setTexSize(width, height);
         this.hat.setPos(0.0F, 0.0F, 0.0F);
-        this.hat.setTexSize(65, 0).addBox(-4.0F, -6.0F, -4.0F, 8.0F, 10.0F, 8.0F, scale + 0.5F);
+        this.hat.texOffs(65, 0).addBox(-4.0F, -6.0F, -4.0F, 8.0F, 10.0F, 8.0F, scale + 0.5F);
         this.hat2 = (new ModelRenderer(this)).setTexSize(width, height);
         this.hat2.setPos(0.0F, 0.0F, 0.0F);
-        this.hat2.setTexSize(65, 25).addBox(-8.0F, -8.0F, -3.0F, 16.0F, 16.0F, 1.0F, scale);
+        this.hat2.texOffs(65, 25).addBox(-8.0F, -8.0F, -3.0F, 16.0F, 16.0F, 1.0F, scale);
         this.hat2.xRot = (-(float) Math.PI / 2F);
         this.hat.addChild(this.hat2);
         this.head.addChild(hat);
 
         this.villagerNose = (new ModelRenderer(this)).setTexSize(width, height);
         this.villagerNose.setPos(0.0F, p_i1164_2_ - 2.0F, 0.0F);
-        this.villagerNose.setTexSize(24, 0).addBox(-1.0F, 2.0F, -6.0F, 2, 4, 2, scale);
+        this.villagerNose.texOffs(24, 0).addBox(-1.0F, 2.0F, -6.0F, 2, 4, 2, scale);
         this.villagerbeard= (new ModelRenderer(this)).setTexSize(width,height);
         this.villagerbeard.setPos(0.0F, p_i1164_2_ - 2.0F, 0.0F);
-        this.villagerbeard.setTexSize(36,38).addBox(-4.0F,6.0F,-5.0F,8,6,1,0);
+        this.villagerbeard.texOffs(36,38).addBox(-4.0F,6.0F,-5.0F,8,6,1,0);
         this.villagermustache1= (new ModelRenderer(this)).setTexSize(width,height);
         this.villagermustache1.setPos(0.0F, p_i1164_2_ - 2.0F, 0.0F);
-        this.villagermustache1.setTexSize(36,38).addBox(-4.0F,3.0F,-5.0F,2,3,1,0);
-        this.villagermustache1.setTexSize(36,38).addBox(2.0F,3.0F,-5.0F,2,3,1,0);
-        this.villagermustache1.setTexSize(36,38).addBox(-2.0F,3.0F,-5.0F,1,1,1,0);
-        this.villagermustache1.setTexSize(36,38).addBox(1.0F,3.0F,-5.0F,1,1,1,0);
+        this.villagermustache1.texOffs(36,38).addBox(-4.0F,3.0F,-5.0F,2,3,1,0);
+        this.villagermustache1.texOffs(36,38).addBox(2.0F,3.0F,-5.0F,2,3,1,0);
+        this.villagermustache1.texOffs(36,38).addBox(-2.0F,3.0F,-5.0F,1,1,1,0);
+        this.villagermustache1.texOffs(36,38).addBox(1.0F,3.0F,-5.0F,1,1,1,0);
         this.head.addChild(this.villagerbeard);
         this.head.addChild(this.villagermustache1);
         this.head.addChild(this.villagerNose);
         this.villagerBody = (new ModelRenderer(this)).setTexSize(width, height);
         this.villagerBody.setPos(0.0F, 0.0F + p_i1164_2_, 0.0F);
-        this.villagerBody.setTexSize(0, 19).addBox(-5.0F, 4.0F, -3.0F, 10, 10, 7, scale);
-        this.villagerBody.setTexSize(0, 38).addBox(-5.0F, 4.0F, -3.0F, 10, 16, 7, scale + 0.5F);
+        this.villagerBody.texOffs(0, 19).addBox(-5.0F, 4.0F, -3.0F, 10, 10, 7, scale);
+        this.villagerBody.texOffs(0, 38).addBox(-5.0F, 4.0F, -3.0F, 10, 16, 7, scale + 0.5F);
         this.villagerArms = (new ModelRenderer(this)).setTexSize(width, height);
-        this.villagerArms.setPos(0.0F, 0.0F + p_i1164_2_ + 2.0F, 0.0F);
-        this.villagerArms.setTexSize(40, 16).addBox(-8.0F, 1.0F, 1.0F, 4, 8, 4, scale+0.009F);
-        this.villagerArms.setTexSize(40, 16).addBox(4.0F, 1.0F, 1.0F, 4, 8, 4, scale+0.009F);
-        this.villagerArms.setTexSize(36, 29).addBox(-4.0F, 5.0F, 1.0F, 8, 4, 4, scale+0.009F);
+        this.villagerArms.setPos(0.0F, 4.0F + p_i1164_2_, 0.0F);
+        this.villagerArms.texOffs(40, 16).addBox(-8.0F, 1.0F, 1.0F, 4, 8, 4, scale+0.009F);
+        this.villagerArms.texOffs(40, 16).addBox(4.0F, 1.0F, 1.0F, 4, 8, 4, scale+0.009F);
+        this.villagerArms.texOffs(36, 29).addBox(-4.0F, 5.0F, 1.0F, 8, 4, 4, scale+0.009F);
         this.rightVillagerLeg = (new ModelRenderer(this, 34, 0)).setTexSize(width, height);
         this.rightVillagerLeg.setPos(-2.0F, 12.0F + p_i1164_2_, 0.0F);
         this.rightVillagerLeg.addBox(-3F, 2.0F, -2.0F, 5, 10, 5, scale);
@@ -149,9 +149,14 @@ public class DwarfModel<T extends DwarfEntity> extends SegmentedModel<T> impleme
         } else {
             this.head.zRot = 0.0F;
         }
-        this.villagerArms.yRot = 3.0F;
-        this.villagerArms.yRot = -1.0F;
+        this.villagerArms.yRot = 0F;
+        this.villagerArms.zRot = 0F;
         this.villagerArms.xRot = -0.75F;
+
+        this.villagerArms.z=-0.5F;
+        this.villagerArms.x=0F;
+        this.villagerArms.y=4.5F;
+
         this.rightVillagerLeg.xRot = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount * 0.5F;
         this.leftVillagerLeg.xRot = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount * 0.5F;
         this.rightVillagerLeg.yRot = 0.0F;
