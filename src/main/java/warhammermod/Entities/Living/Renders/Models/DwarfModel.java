@@ -164,7 +164,7 @@ public class DwarfModel<T extends DwarfEntity> extends SegmentedModel<T> impleme
 
 
             DwarfEntity entityDwarf = (DwarfEntity) entityIn;
-            if (entityDwarf.getArmPose()== AbstractIllagerEntity.ArmPose.ATTACKING || entityDwarf.isBattleready())
+            if (entityDwarf.getArmPose()== AbstractIllagerEntity.ArmPose.ATTACKING)
             {
                 float f = MathHelper.sin(this.attackTime * (float) Math.PI);
                 float f1 = MathHelper.sin((1.0F - (1.0F - this.attackTime) * (1.0F - this.attackTime)) * (float) Math.PI);

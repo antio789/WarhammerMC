@@ -20,6 +20,7 @@ public class WHPanicTask extends Task<DwarfEntity> {
 
    protected void start(ServerWorld p_212831_1_, DwarfEntity p_212831_2_, long p_212831_3_) {
       if (isHurt(p_212831_2_) || hasHostile(p_212831_2_)) {
+
          Brain<?> brain = p_212831_2_.getBrain();
          if (!brain.isActive(Activity.PANIC)) {
             brain.eraseMemory(MemoryModuleType.PATH);
@@ -48,4 +49,6 @@ public class WHPanicTask extends Task<DwarfEntity> {
    public static boolean isHurt(LivingEntity p_220512_0_) {
       return p_220512_0_.getBrain().hasMemoryValue(MemoryModuleType.HURT_BY);
    }
+
+
 }

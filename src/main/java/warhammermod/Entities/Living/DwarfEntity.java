@@ -65,6 +65,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import warhammermod.Entities.Living.Aimanager.Data.DwarfProfession;
 import warhammermod.Entities.Living.Aimanager.Data.DwarfTrades;
+import warhammermod.Entities.Living.Aimanager.DwarfCombattasks;
 import warhammermod.Entities.Living.Aimanager.DwarfVillagerTasks;
 import warhammermod.utils.inithandler.Entityinit;
 import warhammermod.utils.inithandler.WarhammermodRegistry;
@@ -104,8 +105,8 @@ public class DwarfEntity extends AbstractVillagerEntity implements IReputationTr
     private int numberOfRestocksToday;
     private long lastRestockCheckDayTime;
     private boolean assignProfessionWhenSpawned;
-    private static final ImmutableList<MemoryModuleType<?>> MEMORY_TYPES = ImmutableList.of(MemoryModuleType.HOME, MemoryModuleType.JOB_SITE, MemoryModuleType.POTENTIAL_JOB_SITE, MemoryModuleType.MEETING_POINT, MemoryModuleType.LIVING_ENTITIES, MemoryModuleType.VISIBLE_LIVING_ENTITIES, MemoryModuleType.VISIBLE_VILLAGER_BABIES, MemoryModuleType.NEAREST_PLAYERS, MemoryModuleType.NEAREST_VISIBLE_PLAYER, MemoryModuleType.NEAREST_VISIBLE_TARGETABLE_PLAYER, MemoryModuleType.NEAREST_VISIBLE_WANTED_ITEM, MemoryModuleType.WALK_TARGET, MemoryModuleType.LOOK_TARGET, MemoryModuleType.INTERACTION_TARGET, MemoryModuleType.BREED_TARGET, MemoryModuleType.PATH, MemoryModuleType.DOORS_TO_CLOSE, MemoryModuleType.NEAREST_BED, MemoryModuleType.HURT_BY, MemoryModuleType.HURT_BY_ENTITY, MemoryModuleType.NEAREST_HOSTILE, MemoryModuleType.SECONDARY_JOB_SITE, MemoryModuleType.HIDING_PLACE, MemoryModuleType.HEARD_BELL_TIME, MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE, MemoryModuleType.LAST_SLEPT, MemoryModuleType.LAST_WOKEN, MemoryModuleType.LAST_WORKED_AT_POI, MemoryModuleType.GOLEM_DETECTED_RECENTLY);
-    private static final ImmutableList<SensorType<? extends Sensor<? super DwarfEntity>>> SENSOR_TYPES = ImmutableList.of(SensorType.NEAREST_LIVING_ENTITIES, SensorType.NEAREST_PLAYERS, SensorType.NEAREST_ITEMS, SensorType.NEAREST_BED, SensorType.HURT_BY, SensorType.VILLAGER_HOSTILES, WarhammermodRegistry.VISIBLE_VILLAGER_BABIES, WarhammermodRegistry.SECONDARY_POIS, WarhammermodRegistry.Lord_LastSeen);
+    private static final ImmutableList<MemoryModuleType<?>> MEMORY_TYPES = ImmutableList.of(MemoryModuleType.ATTACK_COOLING_DOWN,MemoryModuleType.HOME, MemoryModuleType.JOB_SITE, MemoryModuleType.POTENTIAL_JOB_SITE, MemoryModuleType.MEETING_POINT, MemoryModuleType.LIVING_ENTITIES, MemoryModuleType.VISIBLE_LIVING_ENTITIES, MemoryModuleType.VISIBLE_VILLAGER_BABIES, MemoryModuleType.NEAREST_PLAYERS, MemoryModuleType.NEAREST_VISIBLE_PLAYER, MemoryModuleType.NEAREST_VISIBLE_TARGETABLE_PLAYER, MemoryModuleType.NEAREST_VISIBLE_WANTED_ITEM, MemoryModuleType.WALK_TARGET, MemoryModuleType.LOOK_TARGET, MemoryModuleType.INTERACTION_TARGET, MemoryModuleType.BREED_TARGET, MemoryModuleType.PATH, MemoryModuleType.DOORS_TO_CLOSE, MemoryModuleType.NEAREST_BED, MemoryModuleType.HURT_BY, MemoryModuleType.HURT_BY_ENTITY, MemoryModuleType.NEAREST_HOSTILE, MemoryModuleType.SECONDARY_JOB_SITE, MemoryModuleType.HIDING_PLACE, MemoryModuleType.HEARD_BELL_TIME, MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE, MemoryModuleType.LAST_SLEPT, MemoryModuleType.LAST_WOKEN, MemoryModuleType.LAST_WORKED_AT_POI, MemoryModuleType.GOLEM_DETECTED_RECENTLY,MemoryModuleType.ATTACK_TARGET);
+    private static final ImmutableList<SensorType<? extends Sensor<? super DwarfEntity>>> SENSOR_TYPES = ImmutableList.of(SensorType.NEAREST_LIVING_ENTITIES, SensorType.NEAREST_PLAYERS, SensorType.NEAREST_ITEMS, SensorType.NEAREST_BED, SensorType.HURT_BY, SensorType.VILLAGER_HOSTILES,WarhammermodRegistry.Hostiles, WarhammermodRegistry.VISIBLE_VILLAGER_BABIES, WarhammermodRegistry.SECONDARY_POIS, WarhammermodRegistry.Lord_LastSeen);
     public static final Map<MemoryModuleType<GlobalPos>, BiPredicate<DwarfEntity, PointOfInterestType>> POI_MEMORIES = ImmutableMap.of(MemoryModuleType.HOME, (dwarfEntity, pointOfInterestType) -> {
         return pointOfInterestType == PointOfInterestType.HOME;
     }, MemoryModuleType.JOB_SITE, (dwarfEntity, pointOfInterestType) -> {
@@ -245,14 +246,13 @@ public class DwarfEntity extends AbstractVillagerEntity implements IReputationTr
             return AbstractIllagerEntity.ArmPose.CROSSED;
         }
     }
-
-    public Boolean isBattleready() {
-        return battlestate>0;
-    }
-
-    private int battlestate;
-    public void setBattlestate(int amount){
-        battlestate=amount;
+    @Override
+    public boolean isBlocking() {
+        if(this.getOffhandItem().getItem() instanceof ShieldItem && this.isAggressive() && this.random.nextFloat()<0.33){
+            playSound(SoundEvents.SHIELD_BLOCK,1,1);
+            return true;
+        }
+        else return false;
     }
 
     /**
@@ -329,6 +329,98 @@ public class DwarfEntity extends AbstractVillagerEntity implements IReputationTr
         return dwarfEntity;
     }
 
+    private void registerBrainGoals(Brain<DwarfEntity> p_213744_1_) {
+        DwarfProfession villagerprofession = this.getProfession();
+        if (this.isBaby()) {
+            p_213744_1_.setSchedule(Schedule.VILLAGER_BABY);
+            p_213744_1_.addActivity(Activity.PLAY, DwarfVillagerTasks.getPlayPackage(0.5F));
+            p_213744_1_.addActivity(Activity.PANIC, DwarfVillagerTasks.getPanicPackage(villagerprofession, 0.5F));
+        } else {
+            p_213744_1_.setSchedule(Schedule.VILLAGER_DEFAULT);
+
+            p_213744_1_.addActivity(Activity.PANIC, DwarfCombattasks.getAttackPackage(villagerprofession, 0.5F));
+            p_213744_1_.addActivityWithConditions(Activity.WORK, DwarfVillagerTasks.getWorkPackage(villagerprofession, 0.5F), ImmutableSet.of(Pair.of(MemoryModuleType.JOB_SITE, MemoryModuleStatus.VALUE_PRESENT)));
+        }
+
+        p_213744_1_.addActivity(Activity.CORE, DwarfVillagerTasks.getCorePackage(villagerprofession, 0.5F));
+        p_213744_1_.addActivityWithConditions(Activity.MEET, DwarfVillagerTasks.getMeetPackage(villagerprofession, 0.5F), ImmutableSet.of(Pair.of(MemoryModuleType.MEETING_POINT, MemoryModuleStatus.VALUE_PRESENT)));
+        p_213744_1_.addActivity(Activity.REST, DwarfVillagerTasks.getRestPackage(villagerprofession, 0.5F));
+        p_213744_1_.addActivity(Activity.IDLE, DwarfVillagerTasks.getIdlePackage(villagerprofession, 0.5F));
+        p_213744_1_.addActivity(Activity.PRE_RAID, DwarfVillagerTasks.getPreRaidPackage(villagerprofession, 0.5F));
+        p_213744_1_.addActivity(Activity.RAID, DwarfVillagerTasks.getRaidPackage(villagerprofession, 0.5F));
+        p_213744_1_.addActivity(Activity.HIDE, DwarfVillagerTasks.getHidePackage(villagerprofession, 0.5F));
+        p_213744_1_.setCoreActivities(ImmutableSet.of(Activity.CORE));
+        p_213744_1_.setDefaultActivity(Activity.IDLE);
+        p_213744_1_.setActiveActivityIfPossible(Activity.IDLE);
+        p_213744_1_.updateActivityFromSchedule(this.level.getDayTime(), this.level.getGameTime());
+    }
+
+    public void spawnGolemIfNeeded(ServerWorld p_242367_1_, long p_242367_2_, int p_242367_4_) {
+        if (this.wantsToSpawnGolem(p_242367_2_)) {
+            AxisAlignedBB axisalignedbb = this.getBoundingBox().inflate(10.0D, 10.0D, 10.0D);
+            List<DwarfEntity> list = p_242367_1_.getEntitiesOfClass(DwarfEntity.class, axisalignedbb);
+            List<DwarfEntity> list1 = list.stream().filter((p_226554_2_) -> {
+                return p_226554_2_.wantsToSpawnGolem(p_242367_2_);
+            }).limit(5L).collect(Collectors.toList());
+            if (list1.size() >= p_242367_4_) {
+                DwarfEntity lord = this.trySpawnGolem(p_242367_1_);
+                if (lord != null) {
+                    lord.setVillagerProfession(DwarfProfession.Lord);
+                    list.forEach(GolemLastSeenSensor::golemDetected);
+                }
+            }
+        }
+    }
+
+    public boolean wantsToSpawnGolem(long p_223350_1_) {
+        if (!this.golemSpawnConditionsMet(this.level.getGameTime())) {
+            return false;
+        } else {
+            return !this.brain.hasMemoryValue(MemoryModuleType.GOLEM_DETECTED_RECENTLY);
+        }
+    }
+
+    @Nullable
+    private DwarfEntity trySpawnGolem(ServerWorld p_213759_1_) {
+        BlockPos blockpos = this.blockPosition();
+
+        for(int i = 0; i < 10; ++i) {
+            double d0 = (double)(p_213759_1_.random.nextInt(16) - 8);
+            double d1 = (double)(p_213759_1_.random.nextInt(16) - 8);
+            BlockPos blockpos1 = this.findSpawnPositionForGolemInColumn(blockpos, d0, d1);
+            if (blockpos1 != null) {
+                DwarfEntity lord = Entityinit.DWARF.create(p_213759_1_, (CompoundNBT)null, (ITextComponent)null, (PlayerEntity)null, blockpos1, SpawnReason.MOB_SUMMONED, false, false);
+                if (lord != null) {
+                    if (lord.checkSpawnRules(p_213759_1_, SpawnReason.MOB_SUMMONED) && lord.checkSpawnObstruction(p_213759_1_)) {
+                        p_213759_1_.addFreshEntityWithPassengers(lord);
+                        return lord;
+                    }
+
+                    lord.remove();
+                }
+            }
+        }
+
+        return null;
+    }
+
+    private boolean golemSpawnConditionsMet(long gametime) {
+        Optional<Long> optional = this.brain.getMemory(MemoryModuleType.LAST_SLEPT);
+        if (optional.isPresent() && haslevelforlord()) {
+            return gametime - optional.get() < 24000L;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean haslevelforlord() {
+        if (this.getProfessionLevel()==5) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     /**
      * copy from villager includes everything that doesnt needs to be modified
      */
@@ -354,29 +446,7 @@ public class DwarfEntity extends AbstractVillagerEntity implements IReputationTr
         this.registerBrainGoals(this.getBrain());
     }
 
-    private void registerBrainGoals(Brain<DwarfEntity> p_213744_1_) {
-        DwarfProfession villagerprofession = this.getProfession();
-        if (this.isBaby()) {
-            p_213744_1_.setSchedule(Schedule.VILLAGER_BABY);
-            p_213744_1_.addActivity(Activity.PLAY, DwarfVillagerTasks.getPlayPackage(0.5F));
-        } else {
-            p_213744_1_.setSchedule(Schedule.VILLAGER_DEFAULT);
-            p_213744_1_.addActivityWithConditions(Activity.WORK, DwarfVillagerTasks.getWorkPackage(villagerprofession, 0.5F), ImmutableSet.of(Pair.of(MemoryModuleType.JOB_SITE, MemoryModuleStatus.VALUE_PRESENT)));
-        }
 
-        p_213744_1_.addActivity(Activity.CORE, DwarfVillagerTasks.getCorePackage(villagerprofession, 0.5F));
-        p_213744_1_.addActivityWithConditions(Activity.MEET, DwarfVillagerTasks.getMeetPackage(villagerprofession, 0.5F), ImmutableSet.of(Pair.of(MemoryModuleType.MEETING_POINT, MemoryModuleStatus.VALUE_PRESENT)));
-        p_213744_1_.addActivity(Activity.REST, DwarfVillagerTasks.getRestPackage(villagerprofession, 0.5F));
-        p_213744_1_.addActivity(Activity.IDLE, DwarfVillagerTasks.getIdlePackage(villagerprofession, 0.5F));
-        p_213744_1_.addActivity(Activity.PANIC, DwarfVillagerTasks.getPanicPackage(villagerprofession, 0.5F));
-        p_213744_1_.addActivity(Activity.PRE_RAID, DwarfVillagerTasks.getPreRaidPackage(villagerprofession, 0.5F));
-        p_213744_1_.addActivity(Activity.RAID, DwarfVillagerTasks.getRaidPackage(villagerprofession, 0.5F));
-        p_213744_1_.addActivity(Activity.HIDE, DwarfVillagerTasks.getHidePackage(villagerprofession, 0.5F));
-        p_213744_1_.setCoreActivities(ImmutableSet.of(Activity.CORE));
-        p_213744_1_.setDefaultActivity(Activity.IDLE);
-        p_213744_1_.setActiveActivityIfPossible(Activity.IDLE);
-        p_213744_1_.updateActivityFromSchedule(this.level.getDayTime(), this.level.getGameTime());
-    }
 
     protected void ageBoundaryReached() {
         super.ageBoundaryReached();
@@ -395,6 +465,7 @@ public class DwarfEntity extends AbstractVillagerEntity implements IReputationTr
     }
 
     protected void customServerAiStep() {
+        DwarfCombattasks.updateActivity(this);
         this.level.getProfiler().push("villagerBrain");
         this.getBrain().tick((ServerWorld)this.level, this);
         this.level.getProfiler().pop();
@@ -450,7 +521,7 @@ public class DwarfEntity extends AbstractVillagerEntity implements IReputationTr
                 this.setUnhappy();
                 return ActionResultType.sidedSuccess(this.level.isClientSide);
             } else {
-                boolean flag = this.getOffers().isEmpty();
+                boolean flag = this.getOffers().isEmpty() && this.isAggressive();
                 if (p_230254_2_ == Hand.MAIN_HAND) {
                     if (flag && !this.level.isClientSide) {
                         this.setUnhappy();
@@ -906,53 +977,7 @@ public class DwarfEntity extends AbstractVillagerEntity implements IReputationTr
         }
     }
 
-    public void spawnGolemIfNeeded(ServerWorld p_242367_1_, long p_242367_2_, int p_242367_4_) {
-        if (this.wantsToSpawnGolem(p_242367_2_)) {
-            AxisAlignedBB axisalignedbb = this.getBoundingBox().inflate(10.0D, 10.0D, 10.0D);
-            List<DwarfEntity> list = p_242367_1_.getEntitiesOfClass(DwarfEntity.class, axisalignedbb);
-            List<DwarfEntity> list1 = list.stream().filter((p_226554_2_) -> {
-                return p_226554_2_.wantsToSpawnGolem(p_242367_2_);
-            }).limit(5L).collect(Collectors.toList());
-            if (list1.size() >= p_242367_4_) {
-                IronGolemEntity irongolementity = this.trySpawnGolem(p_242367_1_);
-                if (irongolementity != null) {
-                    list.forEach(GolemLastSeenSensor::golemDetected);
-                }
-            }
-        }
-    }
 
-    public boolean wantsToSpawnGolem(long p_223350_1_) {
-        if (!this.golemSpawnConditionsMet(this.level.getGameTime())) {
-            return false;
-        } else {
-            return !this.brain.hasMemoryValue(MemoryModuleType.GOLEM_DETECTED_RECENTLY);
-        }
-    }
-
-    @Nullable
-    private IronGolemEntity trySpawnGolem(ServerWorld p_213759_1_) {
-        BlockPos blockpos = this.blockPosition();
-
-        for(int i = 0; i < 10; ++i) {
-            double d0 = (double)(p_213759_1_.random.nextInt(16) - 8);
-            double d1 = (double)(p_213759_1_.random.nextInt(16) - 8);
-            BlockPos blockpos1 = this.findSpawnPositionForGolemInColumn(blockpos, d0, d1);
-            if (blockpos1 != null) {
-                IronGolemEntity irongolementity = EntityType.IRON_GOLEM.create(p_213759_1_, (CompoundNBT)null, (ITextComponent)null, (PlayerEntity)null, blockpos1, SpawnReason.MOB_SUMMONED, false, false);
-                if (irongolementity != null) {
-                    if (irongolementity.checkSpawnRules(p_213759_1_, SpawnReason.MOB_SUMMONED) && irongolementity.checkSpawnObstruction(p_213759_1_)) {
-                        p_213759_1_.addFreshEntityWithPassengers(irongolementity);
-                        return irongolementity;
-                    }
-
-                    irongolementity.remove();
-                }
-            }
-        }
-
-        return null;
-    }
 
     @Nullable
     private BlockPos findSpawnPositionForGolemInColumn(BlockPos p_241433_1_, double p_241433_2_, double p_241433_4_) {
@@ -1025,14 +1050,7 @@ public class DwarfEntity extends AbstractVillagerEntity implements IReputationTr
         this.brain.setMemory(MemoryModuleType.LAST_WOKEN, this.level.getGameTime());
     }
 
-    private boolean golemSpawnConditionsMet(long p_223352_1_) {
-        Optional<Long> optional = this.brain.getMemory(MemoryModuleType.LAST_SLEPT);
-        if (optional.isPresent()) {
-            return p_223352_1_ - optional.get() < 24000L;
-        } else {
-            return false;
-        }
-    }
+
 
 
 

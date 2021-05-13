@@ -15,8 +15,10 @@ public class WHClearHurtTask extends Task<DwarfEntity> {
    protected void start(ServerWorld p_212831_1_, DwarfEntity p_212831_2_, long p_212831_3_) {
       boolean flag = PanicTask.isHurt(p_212831_2_) || PanicTask.hasHostile(p_212831_2_) || isCloseToEntityThatHurtMe(p_212831_2_);
       if (!flag) {
+
          p_212831_2_.getBrain().eraseMemory(MemoryModuleType.HURT_BY);
          p_212831_2_.getBrain().eraseMemory(MemoryModuleType.HURT_BY_ENTITY);
+         p_212831_2_.getBrain().eraseMemory(MemoryModuleType.ATTACK_TARGET);
          p_212831_2_.getBrain().updateActivityFromSchedule(p_212831_1_.getDayTime(), p_212831_1_.getGameTime());
       }
 

@@ -26,7 +26,6 @@ public class DwarfProfession {
 
 
     public DwarfProfession(String Name, int id, PointOfInterestType POI, ImmutableSet<Item> item, ImmutableSet<Block> block, @Nullable SoundEvent sound, Item equipement1, Item equipement2){
-        System.out.println("\n \n"+ Name +" "+ id + "\n \n" );
         this.name = Name;
         this.pointOfInterest = POI;
         this.shareitem = item;

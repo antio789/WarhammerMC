@@ -11,17 +11,35 @@ import net.minecraft.entity.ai.brain.sensor.SensorType;
 import net.minecraft.entity.passive.horse.AbstractHorseEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
+import net.minecraft.util.registry.Registry;
+import net.minecraft.util.registry.WorldGenRegistries;
 import net.minecraft.village.PointOfInterestType;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.gen.GenerationStage;
+import net.minecraft.world.gen.feature.IFeatureConfig;
+import net.minecraft.world.gen.feature.NoFeatureConfig;
+import net.minecraft.world.gen.feature.StructureFeature;
+import net.minecraft.world.gen.feature.structure.Structure;
+import net.minecraft.world.gen.feature.structure.TemplateStructurePiece;
+import net.minecraft.world.gen.feature.structure.VillageConfig;
+import net.minecraft.world.gen.feature.structure.VillageStructure;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
+import net.minecraftforge.event.world.BiomeLoadingEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
+import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import warhammermod.Entities.Living.Aimanager.Data.DwarfProfession;
 import warhammermod.Entities.Living.Aimanager.Data.EntityAttributes;
+import warhammermod.Entities.Living.Aimanager.brain.sensor.DwarfHostilesSensor;
 import warhammermod.Entities.Living.Aimanager.brain.sensor.LordLastSeenSensor;
 import warhammermod.Entities.Living.Aimanager.brain.sensor.WHSecondaryPositionSensor;
 import warhammermod.Entities.Living.Aimanager.brain.sensor.dwarfBabiesSensor;
@@ -33,7 +51,11 @@ import warhammermod.Entities.Projectile.FlameEntity;
 import warhammermod.Entities.Projectile.Render.*;
 import warhammermod.Entities.Projectile.StoneEntity;
 import warhammermod.utils.reference;
+import warhammermod.worldgen.dwarfvillage.DwarfVillagePools;
+import warhammermod.worldgen.dwarfvillage.DwarfVillageStructure;
 
+import java.util.Collection;
+import java.util.Locale;
 
 
 public class WarhammermodRegistry {
@@ -117,16 +139,25 @@ public class WarhammermodRegistry {
     public static SensorType<WHSecondaryPositionSensor> SECONDARY_POIS;
     public static SensorType<LordLastSeenSensor> Lord_LastSeen;
     public static SensorType<dwarfBabiesSensor> VISIBLE_VILLAGER_BABIES;
+    public static SensorType<DwarfHostilesSensor> Hostiles;
 
     public static void registersensor(){
         SECONDARY_POIS = registersensor("dwarf_secondary_pois");
         Lord_LastSeen = registerlordseen("lord_lastseen");
         VISIBLE_VILLAGER_BABIES = registerbabysensor("baby_sensor_wh");
+        Hostiles = registerhostiles("hostiles");
     }
 
     private static SensorType registersensor(String name){
         ResourceLocation location = new ResourceLocation(reference.modid, name);
         SensorType event = new SensorType(WHSecondaryPositionSensor::new);
+        event.setRegistryName(location);
+        ForgeRegistries.SENSOR_TYPES.register(event);
+        return event;
+    }
+    private static SensorType registerhostiles(String name){
+        ResourceLocation location = new ResourceLocation(reference.modid, name);
+        SensorType event = new SensorType(DwarfHostilesSensor::new);
         event.setRegistryName(location);
         ForgeRegistries.SENSOR_TYPES.register(event);
         return event;
@@ -156,6 +187,38 @@ public class WarhammermodRegistry {
         DwarfProfession.Slayer = new DwarfProfession("slayer", 4, PointOfInterestType.BUTCHER, SoundEvents.VILLAGER_WORK_BUTCHER, Items.IRON_AXE, Items.IRON_AXE);
         DwarfProfession.Lord = new DwarfProfession("lord", 5, PointOfInterestType.NITWIT, SoundEvents.VILLAGER_WORK_CLERIC,ItemsInit.diamond_warhammer,ItemsInit.Dwarf_shield);
     }
+    /**
+     * structures
+    */
+
+
+
+    private static <FC extends IFeatureConfig, F extends Structure<FC>> StructureFeature<FC, F> register(ResourceLocation p_244162_0_, StructureFeature<FC, F> p_244162_1_) {
+        return WorldGenRegistries.register(WorldGenRegistries.CONFIGURED_STRUCTURE_FEATURE, p_244162_0_, p_244162_1_);
+    }
+
+    public static void registerConfiguredStructures() {
+        Registry<StructureFeature<?, ?>> registry = WorldGenRegistries.CONFIGURED_STRUCTURE_FEATURE;
+        Registry.register(registry, new ResourceLocation(reference.modid, "dwarf_village"), DWARF_VILLAGE2);
+    }
+
+    public static final Structure<VillageConfig> BAse = new DwarfVillageStructure(VillageConfig.CODEC);
+
+
+    public static final StructureFeature<VillageConfig, ? extends Structure<VillageConfig>> DWARF_VILLAGE2= BAse.configured(new VillageConfig(() -> {
+        return DwarfVillagePools.START;
+    }, 6));
+
+    public static final StructureFeature<VillageConfig, ? extends Structure<VillageConfig>> DWARF_VILLAGE = register(new ResourceLocation(reference.modid,"dwarf_village_base"), BAse.configured(new VillageConfig(() -> {
+        return DwarfVillagePools.START;
+    }, 6)));
+
+
+
+    /**
+     * generation
+     */
+
 
     /**
      *helper methods

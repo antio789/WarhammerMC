@@ -483,7 +483,7 @@ public class SkavenEntity extends MonsterEntity implements IRangedAttackMob {
 
     @Override
     public boolean isBlocking() {
-        if(this.getOffhandItem().getItem() instanceof ShieldItem && getTarget()!=null && this.random.nextInt(10)<4){
+        if(this.getOffhandItem().getItem() instanceof ShieldItem && getTarget()!=null && this.random.nextFloat()<0.25){
             playSound(SoundEvents.SHIELD_BLOCK,1,1);
             return true;
         }

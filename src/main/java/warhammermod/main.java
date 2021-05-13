@@ -14,6 +14,8 @@ import net.minecraftforge.client.event.FOVUpdateEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.world.BiomeLoadingEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.InterModComms;
@@ -32,6 +34,8 @@ import warhammermod.utils.inithandler.IReloadItem;
 import warhammermod.utils.inithandler.ItemsInit;
 import warhammermod.utils.inithandler.ModRegistrerevents;
 import warhammermod.utils.inithandler.WarhammermodRegistry;
+import warhammermod.worldgen.dwarfvillage.DwarfVillagePools;
+import warhammermod.worldgen.structures.StructuresHandler;
 
 import java.util.stream.Collectors;
 
@@ -47,6 +51,7 @@ public class main
 
     public main() {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
+
         // Register the setup method for modloading
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         // Register the enqueueIMC method for modloading
@@ -58,13 +63,29 @@ public class main
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
+        //MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH,this::addtobiomes);
+        IEventBus forgeBus = MinecraftForge.EVENT_BUS;
+        forgeBus.addListener(EventPriority.HIGH, this::biomeModification);
     }
 
+    public void biomeModification(final BiomeLoadingEvent event) {
+        System.out.println("passed here \n\n\n\n");
+        if(event.getName().toString().contains("mountain")) {
+            System.out.println("passed here \n\n\n\n");
+            event.getGeneration().getStructures().add(() -> WarhammermodRegistry.DWARF_VILLAGE2);
+        }
+    }
     private void setup(final FMLCommonSetupEvent event) {
         // some preinit code
-        LOGGER.info("HELLO FROM PREINIT");
-        LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
         ModRegistrerevents.preinit();
+        event.enqueueWork(() -> {
+            StructuresHandler.setupStructures();
+            WarhammermodRegistry.registerConfiguredStructures();
+        });
+
+
+
+
 
         //GlobalEntityTypeAttributes.getSupplier(Entityinit.PEGASUS).createInstance()
            //     ;.put(EntityType.HORSE, AbstractHorseEntity.createBaseHorseAttributes().build());

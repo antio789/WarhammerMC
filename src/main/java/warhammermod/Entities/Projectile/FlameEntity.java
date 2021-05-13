@@ -6,6 +6,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.projectile.AbstractFireballEntity;
+import net.minecraft.network.IPacket;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
@@ -14,6 +15,7 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.FMLPlayMessages;
+import net.minecraftforge.fml.network.NetworkHooks;
 import warhammermod.utils.inithandler.Entityinit;
 
 public class FlameEntity extends AbstractFireballEntity {
@@ -106,6 +108,11 @@ public class FlameEntity extends AbstractFireballEntity {
 
     public boolean hurt(DamageSource p_70097_1_, float p_70097_2_) {
         return false;
+    }
+
+    @Override
+    public IPacket<?> getAddEntityPacket(){
+        return NetworkHooks.getEntitySpawningPacket(this);
     }
 
 }
