@@ -68,6 +68,7 @@ import warhammermod.Entities.Living.Aimanager.Data.DwarfTrades;
 import warhammermod.Entities.Living.Aimanager.DwarfCombattasks;
 import warhammermod.Entities.Living.Aimanager.DwarfVillagerTasks;
 import warhammermod.utils.inithandler.Entityinit;
+import warhammermod.utils.inithandler.ItemsInit;
 import warhammermod.utils.inithandler.WarhammermodRegistry;
 
 import javax.annotation.Nullable;
@@ -89,8 +90,8 @@ public class DwarfEntity extends AbstractVillagerEntity implements IReputationTr
     private Boolean hasspawnedlord=false;
 
 
-    public static final Map<Item, Integer> FOOD_POINTS = ImmutableMap.of(Items.BREAD, 4, Items.POTATO, 1, Items.CARROT, 1, Items.BEETROOT, 1);
-    private static final Set<Item> WANTED_ITEMS = ImmutableSet.of(Items.BREAD, Items.POTATO, Items.CARROT, Items.WHEAT, Items.WHEAT_SEEDS, Items.BEETROOT, Items.BEETROOT_SEEDS);
+    public static final Map<Item, Integer> FOOD_POINTS = ImmutableMap.of(ItemsInit.Beer,8,Items.BREAD, 4, Items.POTATO, 1, Items.CARROT, 1, Items.BEETROOT, 1);
+    private static final Set<Item> WANTED_ITEMS = ImmutableSet.of(ItemsInit.Beer,Items.BREAD, Items.POTATO, Items.CARROT, Items.WHEAT, Items.WHEAT_SEEDS, Items.BEETROOT, Items.BEETROOT_SEEDS);
 
     private int updateMerchantTimer;
     private boolean increaseProfessionLevelOnUpdate;

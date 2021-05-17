@@ -16,6 +16,7 @@ import net.minecraft.world.World;
 import warhammermod.Items.melee.ShieldTemplate;
 import warhammermod.utils.inithandler.IReloadItem;
 import warhammermod.utils.inithandler.ItemsInit;
+import warhammermod.utils.reference;
 
 import java.util.Random;
 
@@ -29,7 +30,7 @@ public class GunBase extends Item implements IReloadItem {
     public float height = 1.5F;
 
     public GunBase(Properties properties, Item ammotype, int time, int magsize) {
-        super(properties);
+        super(properties.tab(reference.warhammer));
         Magsize=magsize;
         timetoreload=time;
         AmmoType=ammotype;

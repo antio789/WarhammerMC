@@ -6,11 +6,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.FMLPlayMessages;
 import warhammermod.utils.inithandler.Entityinit;
 
 public class SpearEntity extends Projectilebase{
-    int fuse=2;
     private ItemStack throwed_spear;
     public SpearEntity(EntityType<? extends SpearEntity> p_i50148_1_, World p_i50148_2_) {
         super(p_i50148_1_, p_i50148_2_);
@@ -30,13 +31,15 @@ public class SpearEntity extends Projectilebase{
         this(Entityinit.Spear, world);
     }
 
+
     protected void onHitEntity(EntityRayTraceResult p_213868_1_){
-        this.spawnAtLocation(throwed_spear);
+        if(throwed_spear!=null) this.spawnAtLocation(throwed_spear);
         super.onHitEntity(p_213868_1_);
 
     }
+
     protected void onHitBlock(BlockRayTraceResult p_230299_1_){
-        this.spawnAtLocation(throwed_spear);
+        if(throwed_spear!=null)this.spawnAtLocation(throwed_spear);
         super.onHitBlock(p_230299_1_);
     }
 

@@ -14,15 +14,9 @@ import warhammermod.utils.reference;
 
 public class Ghal_Maraz extends HammerTemplate {
     public Ghal_Maraz(Item.Properties builder){
-        super(ItemTier.DIAMOND,builder.tab(reference.warhammer));
-        attackDamage=9;
-        attackSpeed=-2.35F;
+        super(ItemTier.NETHERITE,builder.tab(reference.warhammer),2.5F,-2.4F);
     }
 
-    public int getItemEnchantability()
-    {
-        return this.getTier().getEnchantmentValue()+15;
-    }
 
     public boolean hitEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         stack.hurtAndBreak(1, attacker, (p_220038_0_) -> {
@@ -65,8 +59,9 @@ public class Ghal_Maraz extends HammerTemplate {
 
     public boolean canApplyAtEnchantingTable(ItemStack stack, net.minecraft.enchantment.Enchantment enchantment)
     {
-        if( !enchantment.equals(Enchantments.MENDING)) super.canApplyAtEnchantingTable(stack,enchantment);
-        return false;
+        if( enchantment.equals(Enchantments.MENDING)) return false;
+        return super.canApplyAtEnchantingTable(stack,enchantment);
+
     }
 
 

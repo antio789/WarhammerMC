@@ -17,13 +17,13 @@ import java.util.Random;
 public class AutogunBase extends Item implements IReloadItem {
     public int timetoreload;
     public int Magsize;
-    private final String AmmoType;
+    private final Item AmmoType;
     protected Random rand= new Random();
     public boolean hasshield=false;
     private final int FireRate;
     private final int AmmoConsumption;
 
-    public AutogunBase(Properties properties, String ammotype, int time, int magsize, int ammoconsumption, int firerate) {
+    public AutogunBase(Properties properties, Item ammotype, int time, int magsize, int ammoconsumption, int firerate) {
         super(properties);
         Magsize=magsize;
         timetoreload=time;
@@ -50,6 +50,7 @@ public class AutogunBase extends Item implements IReloadItem {
     public ActionResult<ItemStack> use(World world, PlayerEntity playerIn, Hand hand) {
 
         ItemStack stack = playerIn.getItemInHand(hand);
+        System.out.println(findAmmo(playerIn).isEmpty());
         if(isCharged(stack) ||playerIn.isCreative()|| !findAmmo(playerIn).isEmpty()){
             playerIn.startUsingItem(hand);
             return ActionResult.consume(stack);
@@ -58,6 +59,7 @@ public class AutogunBase extends Item implements IReloadItem {
     }
 
     public ItemStack findAmmo(PlayerEntity player) {
+
         if (this.isAmmo(player.getItemInHand(Hand.OFF_HAND))) {
             return player.getItemInHand(Hand.OFF_HAND);
         } else if (this.isAmmo(player.getItemInHand(Hand.MAIN_HAND))) {

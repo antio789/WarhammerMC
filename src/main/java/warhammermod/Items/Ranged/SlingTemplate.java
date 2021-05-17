@@ -71,7 +71,7 @@ public class SlingTemplate extends BowItem {
 
                     if (!world.isClientSide) {
 
-                        StoneEntity stone = new StoneEntity(playerentity,world,0);
+                        StoneEntity stone = new StoneEntity(playerentity,world,2.5F);
                         stone.shootFromRotation(playerentity, playerentity.xRot, playerentity.yRot, 0.0F, f * 2.75F, 1.0F);
                         if (f == 1.0F) {
                             stone.setCritArrow(true);

@@ -81,8 +81,8 @@ public abstract class Projectilebase extends AbstractArrowEntity{
                 ((LivingEntity)entity1).setLastHurtMob(entity);
             }
         }
-        float i = TotalDamage();
-
+        float i = getTotalDamage();
+        System.out.println(i+ " totaldamage");
         boolean flag = entity.getType() == EntityType.ENDERMAN;
         int j = entity.getRemainingFireTicks();
         if (this.isOnFire() && !flag) {
@@ -128,7 +128,7 @@ public abstract class Projectilebase extends AbstractArrowEntity{
 
     }
 
-    public float TotalDamage(){
+    public float getTotalDamage(){
         return projectiledamage+extradamage;
     }
 

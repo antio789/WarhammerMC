@@ -20,8 +20,19 @@ public class HammerTemplate extends SwordItem {
     public HammerTemplate(IItemTier tier, Item.Properties properties) {
         super(tier,0,0, properties.tab(reference.warhammer));
         ItemsInit.ITEMS.add(this);
-        this.attackDamage = 2.5F + tier.getAttackDamageBonus();
+        this.attackDamage = 2.5F + tier.getAttackDamageBonus()*2;
         attackSpeed=-2.9F;
+        ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
+        builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", this.attackDamage, AttributeModifier.Operation.ADDITION));
+        builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier", attackSpeed, AttributeModifier.Operation.ADDITION));
+        this.modifierMultimap = builder.build();
+    }
+
+    public HammerTemplate(IItemTier tier, Item.Properties properties, float damage, float attackspeed) {
+        super(tier,0,0, properties.tab(reference.warhammer));
+        ItemsInit.ITEMS.add(this);
+        this.attackDamage = damage + tier.getAttackDamageBonus()*2;
+        attackSpeed=attackspeed;
         ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
         builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", this.attackDamage, AttributeModifier.Operation.ADDITION));
         builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier", attackSpeed, AttributeModifier.Operation.ADDITION));

@@ -25,10 +25,10 @@ public class DwarfProfession {
 
 
 
-    public DwarfProfession(String Name, int id, PointOfInterestType POI, ImmutableSet<Item> item, ImmutableSet<Block> block, @Nullable SoundEvent sound, Item equipement1, Item equipement2){
+    public DwarfProfession(String Name, int id, PointOfInterestType POI, ImmutableSet<Item> shareitems, ImmutableSet<Block> block, @Nullable SoundEvent sound, Item equipement1, Item equipement2){
         this.name = Name;
         this.pointOfInterest = POI;
-        this.shareitem = item;
+        this.shareitem = shareitems;
         this.farmblock = block;
         this.worksound = sound;
         this.ID=id;

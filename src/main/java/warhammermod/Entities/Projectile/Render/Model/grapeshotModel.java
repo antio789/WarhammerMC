@@ -46,12 +46,12 @@ public class grapeshotModel<T extends Entity> extends Model {
 
 
     public void setRotationAngles(T p_225597_1_, float partialticks, float p_225597_3_, float p_225597_4_, float p_225597_5_, float p_225597_6_) {
-
-        bullet.xRot=p_225597_1_.tickCount*1.5F +2;
-        bullet2.yRot=-p_225597_1_.tickCount*1.5F -1;
-        bullet3.zRot=-p_225597_1_.tickCount*1.5F -2;
-        bullet4.xRot=p_225597_1_.tickCount*1.5F +1.5F;
-        bullet5.zRot=-p_225597_1_.tickCount*1.5F -1.5F;
+System.out.println(p_225597_1_.tickCount);
+        bullet.x=p_225597_1_.tickCount*3F +2;
+        bullet2.y=-p_225597_1_.tickCount*3F -1;
+        bullet3.z=-p_225597_1_.tickCount*3F -2;
+        bullet4.x=p_225597_1_.tickCount*3F +1.5F;
+        bullet5.z=-p_225597_1_.tickCount*3F -1.5F;
     }
 
     public Iterable<ModelRenderer> getParts() {

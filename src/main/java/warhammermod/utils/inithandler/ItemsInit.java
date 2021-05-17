@@ -29,45 +29,51 @@ public class ItemsInit {
     public static Item Grenade= new Cartridge().setRegistryName(location("grenade"));
     public static Item Warpstone= new Cartridge().setRegistryName(location("warpstone"));
 
-    public static Item musket = new GunTemplate(new Item.Properties().durability(420).tab(reference.warhammer), Cartridge,40,1,13).setRegistryName(location("musket"));
-    public static Item pistol = new GunTemplate(new Item.Properties().durability(384).tab(reference.warhammer), Cartridge,25,1,8).setRegistryName(location("flintlock_pistol"));
-    public static Item repeater_handgun = new GunTemplate(new Item.Properties().durability(500).tab(reference.warhammer).setISTER(()-> { return RenderRepeater::new;}), Cartridge,92,6,13).setRegistryName(location("nuln_repeater_handgun"));
-    public static Item thunderer_handgun = new GunTemplate(new Item.Properties().durability(540).tab(reference.warhammer), Cartridge,35,1,16).setRegistryName(location("thunderer_handgun"));
+    public static Item musket = new GunTemplate(new Item.Properties().durability(420), Cartridge,40,1,13).setRegistryName(location("musket"));
+    public static Item pistol = new GunTemplate(new Item.Properties().durability(384), Cartridge,25,1,8).setRegistryName(location("flintlock_pistol"));
+    public static Item repeater_handgun = new GunTemplate(new Item.Properties().durability(500).setISTER(()-> { return RenderRepeater::new;}), Cartridge,92,6,13).setRegistryName(location("nuln_repeater_handgun"));
+    public static Item thunderer_handgun = new GunTemplate(new Item.Properties().durability(540), Cartridge,35,1,16).setRegistryName(location("thunderer_handgun"));
 
-    public static Item blunderbuss = new ShotgunTemplate(new Item.Properties().durability(390).tab(reference.warhammer), Shell,40,1,19).setRegistryName(location("blunderbuss"));
-    public static Item GrudgeRaker = new ShotgunTemplate(new Item.Properties().durability(450).tab(reference.warhammer), Shell,40,2,19).setRegistryName(location("grudgeraker"));
+    public static Item blunderbuss = new ShotgunTemplate(new Item.Properties().durability(390), Shell,40,1,19).setRegistryName(location("blunderbuss"));
+    public static Item GrudgeRaker = new ShotgunTemplate(new Item.Properties().durability(450), Shell,40,2,19).setRegistryName(location("grudgeraker"));
 
-    public static Item grenade_launcher = new GrenadeTemplate(new Item.Properties().durability(384).tab(reference.warhammer), Grenade,75,1).setRegistryName(location("grenade_launcher"));
+    public static Item grenade_launcher = new GrenadeTemplate(new Item.Properties().durability(384), Grenade,75,1).setRegistryName(location("grenade_launcher"));
 
     public static Item DrakeGun = new DrakeGunTemplate(new Item.Properties().durability(210).tab(reference.warhammer),64,40).setRegistryName(location("drakegun"));
     public static Item RatlingGun = new RatlingGun(new Item.Properties().durability(210).tab(reference.warhammer).setISTER(()-> { return RenderRatlingGun::new;}),64,80).setRegistryName(location("ratling_gun"));
 
-    public static Item Warplock_jezzail = new WarpgunTemplate(new Item.Properties().durability(384).tab(reference.warhammer), Warpstone,50,1,14).setRegistryName(location("warplock_jezzail"));
+    public static Item Warplock_jezzail = new WarpgunTemplate(new Item.Properties().durability(384), Warpstone,50,1,14).setRegistryName(location("warplock_jezzail"));
 
     public static Item Sling = new SlingTemplate(new Item.Properties().durability(180).tab(reference.warhammer).setISTER(()-> { return RenderSling::new;})).setRegistryName("sling");
 
-    public static final Item Great_pick = new Great_pick(new Item.Properties().setNoRepair()).setRegistryName("war_pick");
-    public static final Item Ghal_Maraz = new Ghal_Maraz(new Item.Properties().setNoRepair().durability((int)(ItemTier.DIAMOND.getUses()*1.3))).setRegistryName("ghal_maraz");
+    public static final Item Great_pick = new Great_pick(new Item.Properties().setNoRepair().tab(reference.warhammer)).setRegistryName("war_pick");
+    public static final Item Ghal_Maraz = new Ghal_Maraz(new Item.Properties().setNoRepair().durability((int)(ItemTier.NETHERITE.getUses()*1.3))).setRegistryName("ghal_maraz");
 
+    public static Item iron_gunsword = new GunSwordTemplate(ItemTier.IRON,25,1,8).setRegistryName(location("iron_gunsword"));
+    public static Item diamond_gunsword = new GunSwordTemplate(ItemTier.DIAMOND,25,1,8).setRegistryName(location("diamond_gunsword"));
 
+    public static final Item netherite_warhammer = new HammerTemplate(ItemTier.NETHERITE,new Item.Properties()).setRegistryName(location("netherite_warhammer"));
     public static final Item diamond_warhammer = new HammerTemplate(ItemTier.DIAMOND,new Item.Properties()).setRegistryName(location("diamond_warhammer"));
     public static final Item wooden_warhammer = new HammerTemplate(ItemTier.WOOD,new Item.Properties()).setRegistryName(location("wooden_warhammer"));
     public static final Item stone_warhammer = new HammerTemplate(ItemTier.STONE,new Item.Properties()).setRegistryName(location("stone_warhammer"));
     public static final Item iron_warhammer = new HammerTemplate(ItemTier.IRON,new Item.Properties()).setRegistryName(location("iron_warhammer"));
     public static final Item gold_warhammer = new HammerTemplate(ItemTier.GOLD,new Item.Properties()).setRegistryName(location("gold_warhammer"));
 
+    public static final Item netherite_dagger = new DaggerTemplate(ItemTier.NETHERITE).setRegistryName(location("netherite_dagger"));
     public static final Item diamond_dagger = new DaggerTemplate(ItemTier.DIAMOND).setRegistryName(location("diamond_dagger"));
     public static final Item wooden_dagger = new DaggerTemplate(ItemTier.WOOD).setRegistryName(location("wooden_dagger"));
     public static final Item stone_dagger = new DaggerTemplate(ItemTier.STONE).setRegistryName(location("stone_dagger"));
     public static final Item iron_dagger = new DaggerTemplate(ItemTier.IRON).setRegistryName(location("iron_dagger"));
     public static final Item gold_dagger = new DaggerTemplate(ItemTier.GOLD).setRegistryName(location("gold_dagger"));
 
+    public static final Item netherite_spear = new SpearTemplate(ItemTier.NETHERITE).setRegistryName(location("netherite_spear"));
     public static final Item diamond_spear = new SpearTemplate(ItemTier.DIAMOND).setRegistryName(location("diamond_spear"));
     public static final Item wooden_spear= new SpearTemplate(ItemTier.WOOD).setRegistryName(location("wooden_spear"));
     public static final Item stone_spear= new SpearTemplate(ItemTier.STONE).setRegistryName(location("stone_spear"));
     public static final Item iron_spear = new SpearTemplate(ItemTier.IRON).setRegistryName(location("iron_spear"));
     public static final Item gold_spear = new SpearTemplate(ItemTier.GOLD).setRegistryName(location("gold_spear"));
 
+    public static final Item netherite_halberd = new Halberdtemplate(ItemTier.NETHERITE).setRegistryName(location("netherite_halberd"));
     public static final Item diamond_halberd = new Halberdtemplate(ItemTier.DIAMOND).setRegistryName(location("diamond_halberd"));
     public static final Item wooden_halberd= new Halberdtemplate(ItemTier.WOOD).setRegistryName(location("wooden_halberd"));
     public static final Item stone_halberd= new Halberdtemplate(ItemTier.STONE).setRegistryName(location("stone_halberd"));

@@ -1,13 +1,18 @@
 package warhammermod.utils.inithandler;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
+import com.sun.org.apache.xalan.internal.xsltc.ProcessorVersion;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.SpriteRenderer;
+import net.minecraft.entity.EntityClassification;
+import net.minecraft.entity.EntitySpawnPlacementRegistry;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.brain.sensor.SensorType;
+import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.horse.AbstractHorseEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -19,7 +24,9 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.WorldGenRegistries;
 import net.minecraft.village.PointOfInterestType;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.MobSpawnInfo;
 import net.minecraft.world.gen.GenerationStage;
+import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.feature.StructureFeature;
@@ -27,6 +34,7 @@ import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.feature.structure.TemplateStructurePiece;
 import net.minecraft.world.gen.feature.structure.VillageConfig;
 import net.minecraft.world.gen.feature.structure.VillageStructure;
+import net.minecraft.world.gen.feature.template.*;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
@@ -86,6 +94,19 @@ public class WarhammermodRegistry {
     /**
      * entities
      */
+
+    public static void addEntitySpawn(BiomeLoadingEvent event){
+        if(event.getName().toString().contains("mountain")){
+            event.getSpawns().getSpawner(EntityClassification.CREATURE).add( new MobSpawnInfo.Spawners(Entityinit.PEGASUS,4,1,4));
+        }
+        if(!event.getSpawns().getSpawner(EntityClassification.MONSTER).isEmpty()){
+            event.getSpawns().getSpawner(EntityClassification.MONSTER).add(new MobSpawnInfo.Spawners(Entityinit.SKAVEN,100,5,7));
+        }
+    }
+    public static void setEntityplacement(){
+        EntitySpawnPlacementRegistry.register(Entityinit.PEGASUS, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::checkAnimalSpawnRules);
+        EntitySpawnPlacementRegistry.register(Entityinit.SKAVEN, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, SkavenEntity::checkSkavenSpawnRules);
+    }
 
     public static void registerEntities(RegistryEvent.Register<EntityType<?>> event){
         Entityinit.PEGASUS.setRegistryName(location("pegasus"));
@@ -185,7 +206,7 @@ public class WarhammermodRegistry {
         DwarfProfession.Engineer = new DwarfProfession("engineer", 2, PointOfInterestType.TOOLSMITH, SoundEvents.VILLAGER_WORK_ARMORER, Items.IRON_AXE,ItemsInit.Dwarf_shield);
         DwarfProfession.FARMER = new DwarfProfession("farmer", 3, PointOfInterestType.FARMER, ImmutableSet.of(Items.WHEAT, Items.WHEAT_SEEDS), ImmutableSet.of(Blocks.FARMLAND), SoundEvents.VILLAGER_WORK_FARMER, Items.IRON_AXE, ItemStack.EMPTY.getItem());
         DwarfProfession.Slayer = new DwarfProfession("slayer", 4, PointOfInterestType.BUTCHER, SoundEvents.VILLAGER_WORK_BUTCHER, Items.IRON_AXE, Items.IRON_AXE);
-        DwarfProfession.Lord = new DwarfProfession("lord", 5, PointOfInterestType.NITWIT, SoundEvents.VILLAGER_WORK_CLERIC,ItemsInit.diamond_warhammer,ItemsInit.Dwarf_shield);
+        DwarfProfession.Lord = new DwarfProfession("lord", 5, PointOfInterestType.NITWIT,  (SoundEvent)null,ItemsInit.diamond_warhammer,ItemsInit.Dwarf_shield);
     }
     /**
      * structures
@@ -202,6 +223,14 @@ public class WarhammermodRegistry {
         Registry.register(registry, new ResourceLocation(reference.modid, "dwarf_village"), DWARF_VILLAGE2);
     }
 
+
+
+    public static void registerProcessors() {
+        Registry<StructureProcessorList> registry = WorldGenRegistries.PROCESSOR_LIST;
+        Registry.register(registry, new ResourceLocation(reference.modid, "pathschange"),DwarfVillagePools.pathchange);
+        Registry.register(registry, new ResourceLocation(reference.modid, "removebuttons"),DwarfVillagePools.remove_buttons);
+    }
+
     public static final Structure<VillageConfig> BAse = new DwarfVillageStructure(VillageConfig.CODEC);
 
 
@@ -209,16 +238,18 @@ public class WarhammermodRegistry {
         return DwarfVillagePools.START;
     }, 6));
 
-    public static final StructureFeature<VillageConfig, ? extends Structure<VillageConfig>> DWARF_VILLAGE = register(new ResourceLocation(reference.modid,"dwarf_village_base"), BAse.configured(new VillageConfig(() -> {
-        return DwarfVillagePools.START;
-    }, 6)));
+
 
 
 
     /**
      * generation
      */
-
+    public static void addStructuresSpawn(BiomeLoadingEvent event){
+        if(event.getName().toString().contains("mountain")) {
+            event.getGeneration().getStructures().add(() -> WarhammermodRegistry.DWARF_VILLAGE2);
+        }
+    }
 
     /**
      *helper methods

@@ -60,7 +60,9 @@ public class PegasusEntity extends HorseEntity {
 
     public void addAdditionalSaveData(CompoundNBT p_213281_1_) {
         super.addAdditionalSaveData(p_213281_1_);
-        p_213281_1_.putInt("Variant", this.getTypeVariant());
+        p_213281_1_.putInt("ModVariant", this.getTypeVariant());
+        p_213281_1_.putBoolean("mixblood", this.ismixblood());
+        System.out.println(getVariant());
         if (!this.inventory.getItem(1).isEmpty()) {
             p_213281_1_.put("ArmorItem", this.inventory.getItem(1).save(new CompoundNBT()));
         }
@@ -69,13 +71,8 @@ public class PegasusEntity extends HorseEntity {
 
     public void readAdditionalSaveData(CompoundNBT p_70037_1_) {
         super.readAdditionalSaveData(p_70037_1_);
-        this.setTypeVariant(p_70037_1_.getInt("Variant"));
-        if (p_70037_1_.contains("ArmorItem", 10)) {
-            ItemStack itemstack = ItemStack.of(p_70037_1_.getCompound("ArmorItem"));
-            if (!itemstack.isEmpty() && this.isArmor(itemstack)) {
-                this.inventory.setItem(1, itemstack);
-            }
-        }
+        this.setTypeVariant(p_70037_1_.getInt("ModVariant"));
+        setMixedblood(p_70037_1_.getBoolean("mixblood"));
         this.updateContainerEquipment();
     }
 
@@ -119,7 +116,7 @@ public class PegasusEntity extends HorseEntity {
             ((PegasusEntity) pegasus).setVariantAndMarkings(CoatColors.WHITE, CoatTypes.NONE);
         }
 
-        else if (random.nextFloat() < 0.1F) {
+        else if (random.nextFloat() < 0.15) {
             HorseEntity mating_partner = (HorseEntity) partner;
             pegasus = Entityinit.PEGASUS.create(world);
             ((PegasusEntity) pegasus).setMixedblood(true);
@@ -387,7 +384,6 @@ public class PegasusEntity extends HorseEntity {
     }
 
     protected int calculateFallDamage(float Falldistance, float modifier) {
-        System.out.println(fallDistance);
         return 0;
     }
 

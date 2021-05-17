@@ -79,7 +79,7 @@ public class WHFarmerWorkTask extends WHSpawnGolemTask {
 
    private void makeBread(DwarfEntity p_234015_1_) {
       Inventory inventory = p_234015_1_.getInventory();
-      if (inventory.countItem(ItemsInit.Beer) <= 12) {
+      if (inventory.countItem(ItemsInit.Beer) <= 3) {
          int i = inventory.countItem(Items.WHEAT);
          int j = 3;
          int k = 3;

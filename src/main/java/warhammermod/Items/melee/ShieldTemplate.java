@@ -7,6 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ShieldItem;
 import net.minecraft.util.ResourceLocation;
 import warhammermod.Items.GunBase;
+import warhammermod.Items.Ranged.GunSwordTemplate;
 import warhammermod.utils.inithandler.ItemsInit;
 import warhammermod.utils.reference;
 
@@ -26,8 +27,8 @@ public class ShieldTemplate  extends ShieldItem {
     private boolean hasGun(LivingEntity entityIn, ItemStack stack){
         if(entityIn instanceof PlayerEntity) {
             PlayerEntity player = (PlayerEntity)entityIn;
-            return stack.getItem() instanceof GunBase && ((GunBase) stack.getItem()).isReadytoFire(stack);
-            //return stack.getItem() instanceof GunSwordTemplate && ((GunSwordTemplate) stack.getItem()).hasshield(player) && ((GunSwordTemplate) stack.getItem()).isReadytoFire(stack);
+            return stack.getItem() instanceof GunBase && ((GunBase) stack.getItem()).isReadytoFire(stack)
+            || stack.getItem() instanceof GunSwordTemplate && ((GunSwordTemplate) stack.getItem()).isReadytoFire(stack);
         }return false;
     }
 

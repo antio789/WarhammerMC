@@ -2,7 +2,6 @@ package warhammermod.Entities.Living.Aimanager.DwarfTasks;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
-import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.brain.BrainUtil;
 import net.minecraft.entity.ai.brain.memory.MemoryModuleStatus;
@@ -15,6 +14,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.world.server.ServerWorld;
+import warhammermod.utils.inithandler.Entityinit;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -27,7 +27,7 @@ public class WHShareItemsTask extends Task<DwarfEntity> {
    }
 
    protected boolean checkExtraStartConditions(ServerWorld p_212832_1_, DwarfEntity p_212832_2_) {
-      return BrainUtil.targetIsValid(p_212832_2_.getBrain(), MemoryModuleType.INTERACTION_TARGET, EntityType.VILLAGER);
+      return BrainUtil.targetIsValid(p_212832_2_.getBrain(), MemoryModuleType.INTERACTION_TARGET, Entityinit.DWARF);
    }
 
    protected boolean canStillUse(ServerWorld p_212834_1_, DwarfEntity p_212834_2_, long p_212834_3_) {

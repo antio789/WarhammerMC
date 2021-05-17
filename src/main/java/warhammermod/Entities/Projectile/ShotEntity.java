@@ -5,11 +5,14 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.FMLPlayMessages;
 import warhammermod.utils.inithandler.Entityinit;
 
 public class ShotEntity extends Projectilebase {
     public BlockPos Playerpos;
+    private int timer;
     public ShotEntity(World world) {
         super(Entityinit.ShotEntity, world);
     }
@@ -36,22 +39,27 @@ public class ShotEntity extends Projectilebase {
     }
 
     protected void onHitEntity(EntityRayTraceResult entityhit) {
-        double distance = Math.sqrt(distanceToSqr(Playerpos.getX(),Playerpos.getY(),Playerpos.getZ()));
-        if (distance>23){
-            this.remove();
-        }else {
-            modifydamage(distance);
+        if(modifydamage(timer)) {
             super.onHitEntity(entityhit);
-        }
+        }else this.remove();
+
     }
 
-    public double damagemodifier(double X){
-        return Math.min( -0.0476*X+1.21,1);
+    public void tick()
+    {
+        super.tick();
+        timer++;
     }
 
-    public void modifydamage(double distance){
+    public boolean modifydamage(double distance){
         double modifier = damagemodifier(distance);
         projectiledamage*=modifier;
         extradamage*=modifier;
+        return !(modifier==0);
+    }
+
+    public double damagemodifier(double X){
+        if(X==0)X=1;
+        return Math.max( -0.3*X+1.3,0);
     }
 }

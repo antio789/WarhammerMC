@@ -54,17 +54,21 @@ public class StoneEntity extends Projectilebase implements IRendersAsItem {
     protected void onHitEntity(EntityRayTraceResult p_213868_1_) {
         float f = (float)this.getDeltaMovement().length();
         double damageSum = projectiledamage+extradamage;
+        System.out.println(damageSum+ " damagesum");
         int i = MathHelper.ceil(MathHelper.clamp((double)f * damageSum, 0.0D, 2.147483647E9D));
+        System.out.println(damageSum+ " i");
         if (this.isCritArrow()) {
             long j = this.random.nextInt(i / 2 + 2);
             i = (int)Math.min(j + (long)i, 2147483647L);
         }
+        System.out.println(damageSum+ " i");
         setTotaldamage(i);
+        super.onHitEntity(p_213868_1_);
 
     }
 
     @Override
-    public float TotalDamage(){
+    public float getTotalDamage(){
         return totaldamage;
     }
 

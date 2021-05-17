@@ -37,7 +37,7 @@ public class SpearTemplate extends SwordItem {
             PlayerEntity player = (PlayerEntity)entityLiving;
 
             SpearEntity entity = new SpearEntity(player,worldIn,getDamage(),stack);
-            entity.shoot(player.xRot, player.yRot, 0.0F, 1.3F, 1.0F);
+            entity.shootFromRotation(player,player.xRot, player.yRot, 0.0F, 1.3F, 1.0F);
 
             int i = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SHARPNESS, stack);
             if (i > 0) {

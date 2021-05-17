@@ -9,7 +9,7 @@ import net.minecraftforge.fml.network.FMLPlayMessages;
 import warhammermod.utils.inithandler.Entityinit;
 
 public class HalberdEntity extends Projectilebase{
-    int fuse=2;
+    int fuse=20;
     public HalberdEntity(EntityType<? extends HalberdEntity> p_i50148_1_, World p_i50148_2_) {
         super(p_i50148_1_, p_i50148_2_);
     }
@@ -21,18 +21,20 @@ public class HalberdEntity extends Projectilebase{
     }
     public HalberdEntity(LivingEntity shooter, World world, float damage) {
         this(world, shooter, damage, Entityinit.halberdentity);
+        System.out.println("created");
     }
     public HalberdEntity(FMLPlayMessages.SpawnEntity spawnEntity, World world) {
         this(Entityinit.halberdentity, world);
     }
-
+/*
     @OnlyIn(Dist.CLIENT)
     public boolean shouldRenderAtSqrDistance(double p_70112_1_) { return false; }
-
+*/
     public void tick()
     {
         super.tick();
-        if(fuse==0){
+        fuse--;
+        if(fuse==18){
             this.remove();
         }
     }

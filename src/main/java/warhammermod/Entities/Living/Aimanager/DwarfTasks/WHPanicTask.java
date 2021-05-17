@@ -6,6 +6,7 @@ import net.minecraft.entity.ai.brain.Brain;
 import net.minecraft.entity.ai.brain.memory.MemoryModuleType;
 import net.minecraft.entity.ai.brain.schedule.Activity;
 import net.minecraft.entity.ai.brain.task.Task;
+import net.minecraft.entity.player.PlayerEntity;
 import warhammermod.Entities.Living.DwarfEntity;
 import net.minecraft.world.server.ServerWorld;
 

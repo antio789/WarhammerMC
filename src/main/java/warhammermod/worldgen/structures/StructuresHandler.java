@@ -24,9 +24,9 @@ public class StructuresHandler {
     public static void setupStructures() {
         setupMapSpacingAndLand(
                 WarhammermodRegistry.BAse, /* The instance of the structure */
-                new StructureSeparationSettings(10 /* average distance apart in chunks between spawn attempts */,
+                new StructureSeparationSettings(19 /* average distance apart in chunks between spawn attempts */,
                         4 /* minimum distance apart in chunks between spawn attempts. MUST BE LESS THAN ABOVE VALUE*/,
-                        10387312 /* this modifies the seed of the structure so no two structures always spawn over each-other. Make this large and unique. */),
+                        10387311 /* this modifies the seed of the structure so no two structures always spawn over each-other. Make this large and unique. */),
                 true);
 
 

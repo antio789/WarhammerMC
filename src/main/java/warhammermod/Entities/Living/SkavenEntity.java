@@ -435,7 +435,7 @@ public class SkavenEntity extends MonsterEntity implements IRangedAttackMob {
 
     protected void populateDefaultEquipmentEnchantments(DifficultyInstance difficulty) {
         float f = difficulty.getSpecialMultiplier();
-        this.enchantSpawnedWeapon(f);
+        if(this.random.nextFloat() > 0.5F) this.enchantSpawnedWeapon(f);
     }
 
     public void addAdditionalSaveData(CompoundNBT compoundNBT) {
@@ -459,7 +459,7 @@ public class SkavenEntity extends MonsterEntity implements IRangedAttackMob {
 
     public static boolean checkSkavenSpawnRules(EntityType<SkavenEntity> entityType, IServerWorld world, SpawnReason spawnReason, BlockPos pos, Random random) {
         if (world.getDifficulty() != Difficulty.PEACEFUL && isDarkEnoughToSpawn(world, pos, random) && checkMobSpawnRules(entityType, world, spawnReason, pos, random) && !spawnReason.equals(SpawnReason.REINFORCEMENT)) {
-            return Objects.equals(world.getBiomeName(pos), Optional.of(Biomes.MOUNTAINS)) || pos.getY() < 35;
+            return Objects.equals(world.getBiomeName(pos), Optional.of(Biomes.MOUNTAINS)) || pos.getY() < 60;
         }
         return false;
     }

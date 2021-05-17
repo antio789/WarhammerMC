@@ -20,7 +20,6 @@ public class WHAttackTargetTask extends Task<MobEntity> {
    }
 
    protected boolean checkExtraStartConditions(ServerWorld p_212832_1_, MobEntity p_212832_2_) {
-      System.out.println("attack");
       LivingEntity livingentity = this.getAttackTarget(p_212832_2_);
       return !this.isHoldingUsableProjectileWeapon(p_212832_2_) && BrainUtil.canSee(p_212832_2_, livingentity) && BrainUtil.isWithinMeleeAttackRange(p_212832_2_, livingentity);
    }

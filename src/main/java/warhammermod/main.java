@@ -44,7 +44,7 @@ import java.util.stream.Collectors;
 public class main
 {
     // Directly reference a log4j logger.
-    private static final Logger LOGGER = LogManager.getLogger();
+    public static final Logger LOGGER = LogManager.getLogger();
     @OnlyIn(Dist.CLIENT)
     public static final KeyBinding horsedown = new KeyBinding("pegasus down", 66, "key.categories.movement");
 
@@ -69,11 +69,8 @@ public class main
     }
 
     public void biomeModification(final BiomeLoadingEvent event) {
-        System.out.println("passed here \n\n\n\n");
-        if(event.getName().toString().contains("mountain")) {
-            System.out.println("passed here \n\n\n\n");
-            event.getGeneration().getStructures().add(() -> WarhammermodRegistry.DWARF_VILLAGE2);
-        }
+        WarhammermodRegistry.addStructuresSpawn(event);
+        WarhammermodRegistry.addEntitySpawn(event);
     }
     private void setup(final FMLCommonSetupEvent event) {
         // some preinit code
@@ -81,6 +78,7 @@ public class main
         event.enqueueWork(() -> {
             StructuresHandler.setupStructures();
             WarhammermodRegistry.registerConfiguredStructures();
+            WarhammermodRegistry.registerProcessors();
         });
 
 
@@ -147,7 +145,36 @@ public class main
         if (event.getType().equals(RenderGameOverlayEvent.ElementType.HOTBAR)) {
 
             PlayerEntity player = Minecraft.getInstance().player;
-            if(player != null && player.isUsingItem() && player.getUseItem().getItem() instanceof IReloadItem) {
+            if(player != null && !player.isCreative() && player.isUsingItem() && player.getUseItem().getItem() instanceof IReloadItem) {
+                IReloadItem item = (IReloadItem) player.getUseItem().getItem();
+                if (!item.isReadytoFire(player.getUseItem())) {
+
+                    int reloadtime = item.getTimetoreload();
+                    float diff = reloadtime - player.getTicksUsingItem();
+                    float f = Math.max(diff / reloadtime, 0);
+                    if( f>0 && f<1 ) {
+                        int i = event.getWindow().getGuiScaledWidth() / 2;
+                        int screenHeight = event.getWindow().getGuiScaledHeight();
+                        int j2 = screenHeight - 20;
+                        int k2 = i + 91 + 6;
+                        MatrixStack p_238443_2_ = event.getMatrixStack();
+                        Minecraft.getInstance().getTextureManager().bind(AbstractGui.GUI_ICONS_LOCATION);
+                        int blitoffset = Minecraft.getInstance().gui.getBlitOffset();
+                        int l1 = (int) (f * 19.0F);
+                        RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+                        AbstractGui.blit(p_238443_2_, k2, j2, blitoffset, 0, 94, 18, 18, 256, 256);
+                        AbstractGui.blit(p_238443_2_, k2, j2 + 18 - l1, blitoffset, 18, 112 - l1, 18, l1, 256, 256);
+                    }
+                }
+            }
+        }
+    }
+
+    public void gunreloadindicator(RenderGameOverlayEvent event){
+        if (event.getType().equals(RenderGameOverlayEvent.ElementType.HOTBAR)) {
+
+            PlayerEntity player = Minecraft.getInstance().player;
+            if(player != null && !player.isCreative() && player.isUsingItem() && player.getUseItem().getItem() instanceof IReloadItem) {
                 IReloadItem item = (IReloadItem) player.getUseItem().getItem();
                 if (!item.isReadytoFire(player.getUseItem())) {
 

@@ -57,10 +57,12 @@ public class Entityinit {
             .setTrackingRange(64).clientTrackingRange(10).setUpdateInterval(1)
             .setShouldReceiveVelocityUpdates(true).sized(1.3964844F, 1.6F)
             .build(location("skaven").toString());
+    public static Item SKAVEN_SPAWN_EGG = new SpawnEggItem(SKAVEN,13698049,894731,(new Item.Properties()).tab(reference.warhammer)).setRegistryName("skaven_egg");
 
-     public static EntityType<DwarfEntity> DWARF = EntityType.Builder.<DwarfEntity>of(DwarfEntity::new, EntityClassification.MISC)
+
+    public static EntityType<DwarfEntity> DWARF = EntityType.Builder.<DwarfEntity>of(DwarfEntity::new, EntityClassification.MISC)
             .sized(0.6F, 1.7F).clientTrackingRange(10).build(location("dwarf").toString());
-    public static Item DWARF_SPAWN_EGG = new SpawnEggItem(DWARF,10528073,15528173,(new Item.Properties()).tab(reference.warhammer)).setRegistryName("dwarf_egg");
+    public static Item DWARF_SPAWN_EGG = new SpawnEggItem(DWARF,1599971,15721509,(new Item.Properties()).tab(reference.warhammer)).setRegistryName("dwarf_egg");
 
 
 

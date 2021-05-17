@@ -3,6 +3,8 @@ package warhammermod.Items.melee;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -35,7 +37,7 @@ public class Halberdtemplate extends SwordItem {
             if (entity == null) {
                 return 0.0F;
             } else {
-                return entity.getUseItem() != stack ? 0.0F : entity.getTicksUsingItem() <980? 1.0F : 0.0F;
+                return entity.getUseItem() != stack ? 0.0F : entity.getTicksUsingItem() <20? 0.0F : 1.0F;
             }
         });
     }
@@ -55,7 +57,16 @@ public class Halberdtemplate extends SwordItem {
             PlayerEntity player = (PlayerEntity)entityLiving;
 
             HalberdEntity entity = new HalberdEntity(player,world, getDamage()*1.3F);
-            entity.shoot(player.xRot, player.yRot, 0.0F, 3F, 0.5F);
+            int i = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SHARPNESS, stack);
+            if (i > 0) {
+                entity.setpowerDamage(i);
+            }
+            int k = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.KNOCKBACK, stack) + 1;
+            if (k > 0) {
+                entity.setknockbacklevel(k);
+            }
+            entity.setPos(player.getX(), player.getEyeY() - 0.26, player.getZ());
+            entity.shootFromRotation(player,player.xRot, player.yRot, 0.0F, 3F, 0.5F);
 
             world.addFreshEntity(entity);
             world.playSound(null,player.blockPosition(),SoundEvents.PLAYER_ATTACK_KNOCKBACK,SoundCategory.PLAYERS,1,1);
@@ -76,7 +87,7 @@ public class Halberdtemplate extends SwordItem {
     }
 
     public UseAction getUseAnimation(ItemStack stack) {
-        return UseAction.SPEAR;
+        return UseAction.BOW;
     }
 
     public float getDamage() {

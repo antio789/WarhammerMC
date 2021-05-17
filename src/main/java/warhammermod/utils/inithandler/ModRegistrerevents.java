@@ -22,17 +22,15 @@ public class ModRegistrerevents {
         public static void onItemregister(RegistryEvent.Register<Item> event) {
             ItemsInit.ITEMS.add(Entityinit.Pegasus_SPAWN_EGG);
             ItemsInit.ITEMS.add(Entityinit.DWARF_SPAWN_EGG);
+            ItemsInit.ITEMS.add(Entityinit.SKAVEN_SPAWN_EGG);
             event.getRegistry().registerAll(ItemsInit.ITEMS.toArray(new Item[0]));
         }
 
         @SubscribeEvent
         public static void onworld(RegistryEvent.Register<Structure<?>> event) {
-
             WarhammermodRegistry.BAse.setRegistryName(location("dwarf_village"));
             event.getRegistry().register(WarhammermodRegistry.BAse);
-
             }
-
 
 
 

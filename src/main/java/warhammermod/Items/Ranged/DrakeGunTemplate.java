@@ -15,7 +15,7 @@ public class DrakeGunTemplate extends AutogunBase {
 
     public DrakeGunTemplate(Properties properties, int MagSize, int time) {
         //super(properties,MagSize,1,time, Items.BLAZE_ROD.getName().toString(),5);
-        super(properties, Items.BLAZE_ROD.getRegistryName().toString(), time, MagSize,1,4);
+        super(properties, Items.BLAZE_ROD, time, MagSize,1,4);
     }
 
     public void fire(PlayerEntity player, World world, ItemStack stack){

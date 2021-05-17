@@ -7,6 +7,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.brain.memory.MemoryModuleStatus;
 import net.minecraft.entity.ai.brain.memory.MemoryModuleType;
 import net.minecraft.entity.ai.brain.task.Task;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.EntityPredicates;
 import net.minecraft.world.server.ServerWorld;
 import warhammermod.Entities.Living.DwarfEntity;
@@ -18,15 +19,16 @@ public class TargetTask extends Task<CreatureEntity> {
 
    public TargetTask(MemoryModuleType<? extends LivingEntity> p_i50346_1_) {
       super(ImmutableMap.of(MemoryModuleType.ATTACK_TARGET, MemoryModuleStatus.VALUE_ABSENT,p_i50346_1_, MemoryModuleStatus.VALUE_PRESENT));
-      System.out.println("here1");
       this.target = p_i50346_1_;
    }
 
 
 
    public void start(ServerWorld p_212831_1_, CreatureEntity entityIn, long p_212831_3_) {
-      System.out.println("here2");
       LivingEntity entity = entityIn.getBrain().getMemory(this.target).get();
+      if(entity instanceof PlayerEntity && ((PlayerEntity) entity).isCreative()){
+         return;
+      }
       setTarget(entityIn,entity);
    }
 
