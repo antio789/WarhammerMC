@@ -4,6 +4,8 @@ import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemTier;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 import warhammermod.Items.BeerTemplate;
 import warhammermod.Items.Ranged.*;
 import warhammermod.Items.Render.Model.*;
@@ -20,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ItemsInit {
-    public static final List<Item> ITEMS = new ArrayList<>();
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, reference.modid);
 
     public static Item Beer = new BeerTemplate().setRegistryName("beer");
 

@@ -1,16 +1,26 @@
 package warhammermod.Items.melee.specials;
 
+import com.google.common.collect.Lists;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemTier;
+import net.minecraft.item.*;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import warhammermod.Items.melee.HammerTemplate;
 import warhammermod.utils.reference;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class Ghal_Maraz extends HammerTemplate {
     public Ghal_Maraz(Item.Properties builder){
@@ -43,6 +53,18 @@ public class Ghal_Maraz extends HammerTemplate {
             }
         }
         return true;
+    }
+
+    public Rarity getRarity(ItemStack p_77613_1_) {
+        return Rarity.EPIC;
+    }
+
+
+    @OnlyIn(Dist.CLIENT)
+    public void appendHoverText(ItemStack p_77624_1_, @Nullable World p_77624_2_, List<ITextComponent> p_77624_3_, ITooltipFlag p_77624_4_) {
+
+            p_77624_3_.add((new TranslationTextComponent("The Legendary Warhammer, use wisely")));
+
     }
 
     public void addeffects(PlayerEntity player,int tier){

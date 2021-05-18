@@ -12,7 +12,7 @@
   "item.warhammermod.grudgeraker":"Grudge-Raker",
   "item.warhammermod.blunderbuss":"Blunderbuss",
   "item.warhammermod.diamond_chainmail_helmet":"Diamond Chainmail Helmet",
-  "item.warhammermod.diamond_chainmail":"Diamond Chainmail",
+  "item.warhammermod.diamond_chainmail_chestplate":"Diamond Chainmail",
   "item.warhammermod.diamond_chainmail_leggings":"Diamond Chainmail Leggings",
   "item.warhammermod.diamond_chainmail_boots":"Diamond Chainmail Boots",
   "item.warhammermod.musket":"Musket",
@@ -38,6 +38,10 @@
   "item.warhammermod.iron_warhammer":"Iron Warhammer",
   "item.warhammermod.gold_warhammer":"Gold Warhammer",
   "item.warhammermod.netherite_warhammer":"Netherite Warhammer",
+
+  "key.categories.warhammer":"Warhammer",
+  "warhammer_pegasus_down": "Pegasus fly down",
+  "warhammer_wiki map": "Display the Wiki",
 
   "item.warhammermod.wooden_dagger":"Wooden Dagger",
   "item.warhammermod.stone_dagger":"Stone Dagger",

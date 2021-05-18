@@ -51,7 +51,7 @@ public class main
 
     public main() {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
-
+        eventBus.register(this);
         // Register the setup method for modloading
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         // Register the enqueueIMC method for modloading
