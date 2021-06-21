@@ -26,8 +26,8 @@ public class MapGenSkavenVillage extends MapGenVillage
 
     public MapGenSkavenVillage()
     {
-        this.distance = 28;
-        this.minTownSeparation = 8;
+        this.distance = 28;//28
+        this.minTownSeparation = 8;//8
     }
 
 

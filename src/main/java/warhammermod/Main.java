@@ -155,7 +155,7 @@ public class Main {
 
     protected static final ResourceLocation WIKI_image = new ResourceLocation(reference.modid,"textures/special/modwiki.png");;
 
-
+@SideOnly(Side.CLIENT)
     public void showmodwiki(ScaledResolution scaledRes){
 
             Minecraft mc = Minecraft.getMinecraft();

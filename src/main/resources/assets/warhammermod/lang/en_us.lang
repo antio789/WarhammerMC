@@ -1,3 +1,8 @@
+item.ghal_maraz.succes="You are blessed by the Gods"
+item.ghal_maraz.fail="The Gods are not with you today"
+item.ghal_maraz.break="Ghal Maraz leaves you now but will come back in time of need"
+
+
 item.cartridge.name=Cartridge
 item.bullet.name=Bullet
 item.grenade.name=Grenade
@@ -52,9 +57,9 @@ item.iron halberd.name=Iron Halberd
 item.stone halberd.name=Stone Halberd
 item.wooden halberd.name=Wooden Halberd
 
-entity.dwarf.name=Dwarf
-entity.pegasus.name=Pegasus
-entity.Pirate Skeleton.name=Pirate Skeleton
-entity.skaven.name=skaven
+entity.warhammmermod.dwarf.name=Dwarf
+entity.warhammmermod.pegasus.name=Pegasus
+entity.warhammmermod.Pirate Skeleton.name=Pirate Skeleton
+entity.warhammmermod.skaven.name=Skaven
 
 tile.tblock.name=tblock

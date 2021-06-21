@@ -2,5 +2,14 @@
   "parent": "item/handheld",
   "textures": {
     "layer0": "warhammermod:items/ghal maraz"
-  }
+  },
+
+  "overrides": [
+    {
+      "predicate": {
+        "powerhit": 1
+      },
+      "model": "warhammermod:item/gunsecond/ghal maraz"
+    }
+  ]
 }

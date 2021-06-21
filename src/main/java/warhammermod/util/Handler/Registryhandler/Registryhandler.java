@@ -1,5 +1,6 @@
 package warhammermod.util.Handler.Registryhandler;
 
+import net.minecraft.client.particle.Particle;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -30,6 +31,8 @@ import warhammermod.util.Handler.inithandler.Itemsinit;
 import warhammermod.util.confighandler.confighandler;
 import warhammermod.util.reference;
 
+import static warhammermod.util.reference.modid;
+
 @Mod.EventBusSubscriber
 public class Registryhandler {
 
@@ -37,6 +40,8 @@ public class Registryhandler {
     public static void onItemregister(RegistryEvent.Register<Item> event){
         event.getRegistry().registerAll(Itemsinit.ITEMS.toArray(new Item[0]));
     }
+
+
 
 
     /*@SubscribeEvent
@@ -78,18 +83,19 @@ public class Registryhandler {
     }
     @SubscribeEvent
     public static void entityis(RegistryEvent.Register<EntityEntry> event){
-        EntityRegistry.registerModEntity(new ResourceLocation(reference.modid+":"+"bullet"), EntityBullet.class,"bullet",0,reference.modid,64,30,true);
-        EntityRegistry.registerModEntity(new ResourceLocation(reference.modid+":"+"spear"), Entityspear.class,"spear_entity",1,reference.modid,55,30,true);
-        EntityRegistry.registerModEntity(new ResourceLocation(reference.modid+":"+"grenade"), EntityGrenade.class,"grenade_entity",2,reference.modid,64,30,true);
-        EntityRegistry.registerModEntity(new ResourceLocation(reference.modid+":"+"halberd"), EntityHalberd.class,"halberd_entity",3,reference.modid,10,30,true);
-        EntityRegistry.registerModEntity(new ResourceLocation(reference.modid+":"+"dwarf"), EntityDwarf.class,"dwarf",4,reference.modid,64,1,true,1599971,15721509);
-        EntityRegistry.registerModEntity(new ResourceLocation(reference.modid+":"+"shotgun pellet"), Entityshotgun.class,"bullets",5,reference.modid,64,30,true);
-        EntityRegistry.registerModEntity(new ResourceLocation(reference.modid+":"+"pegasus"), EntityPegasus.class,"pegasus",6,reference.modid,64,1,true,15528173,15395562);
-        EntityRegistry.registerModEntity(new ResourceLocation(reference.modid+":"+"PirateSkeleton"), EntityPirateSkeleton.class,"Pirate Skeleton",7,reference.modid,64,1,true,12698049,12910592);
-        EntityRegistry.registerModEntity(new ResourceLocation(reference.modid+":"+"skaven"), EntitySkaven.class,"skaven",8,reference.modid,64,1,true,13698049,11910592);
-        EntityRegistry.registerModEntity(new ResourceLocation(reference.modid+":"+"Warp bullet"), EntityWarpBullet.class,"warp bullet",9,reference.modid,64,30,true);
-        EntityRegistry.registerModEntity(new ResourceLocation(reference.modid+":"+"stone"), EntityStone.class,"stone",10,reference.modid,64,30,true);
-        EntityRegistry.registerModEntity(new ResourceLocation(reference.modid+":"+"flame"), Entityflame.class,"flame",11,reference.modid,64,30,true);
+        EntityRegistry.registerModEntity(new ResourceLocation(modid+":"+"bullet"), EntityBullet.class,modid+"."+"bullet",0, modid,64,30,true);
+        EntityRegistry.registerModEntity(new ResourceLocation(modid+":"+"spear"), Entityspear.class,modid+"."+"spear_entity",1, modid,55,30,true);
+        EntityRegistry.registerModEntity(new ResourceLocation(modid+":"+"grenade"), EntityGrenade.class,modid+"."+"grenade_entity",2, modid,64,30,true);
+        EntityRegistry.registerModEntity(new ResourceLocation(modid+":"+"halberd"), EntityHalberd.class,modid+"."+"halberd_entity",3, modid,10,30,true);
+        EntityRegistry.registerModEntity(new ResourceLocation(modid+":"+"dwarf"), EntityDwarf.class,modid+"."+"dwarf",4, modid,64,1,true,1599971,15721509);
+        EntityRegistry.registerModEntity(new ResourceLocation(modid+":"+"shotgun pellet"), Entityshotgun.class,modid+"."+"pellet",5, modid,64,30,true);
+        EntityRegistry.registerModEntity(new ResourceLocation(modid+":"+"pegasus"), EntityPegasus.class,modid+"."+"pegasus",6, modid,64,1,true,15528173,15395562);
+        EntityRegistry.registerModEntity(new ResourceLocation(modid+":"+"PirateSkeleton"), EntityPirateSkeleton.class,modid+"."+"Pirate Skeleton",7, modid,64,1,true,12698049,12910592);
+
+        EntityRegistry.registerModEntity(new ResourceLocation(modid+":"+"skaven"), EntitySkaven.class,modid+"."+"skaven",8, modid,64,1,true,13698049,11910592);
+        EntityRegistry.registerModEntity(new ResourceLocation(modid+":"+"Warp bullet"), EntityWarpBullet.class,modid+"."+"warp bullet",9, modid,64,30,true);
+        EntityRegistry.registerModEntity(new ResourceLocation(modid+":"+"stone"), EntityStone.class,modid+"."+"stone",10, modid,64,30,true);
+        EntityRegistry.registerModEntity(new ResourceLocation(modid+":"+"flame"), Entityflame.class,modid+"."+"flame",11, modid,64,30,true);
 
 
     }

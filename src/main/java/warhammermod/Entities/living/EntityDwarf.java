@@ -65,10 +65,11 @@ import static warhammermod.util.confighandler.confighandler.Config_enable.Mob_en
 
 public class EntityDwarf extends EntityAgeable implements INpc, IMerchant
 {
+
+    private static final Logger LOGGER = LogManager.getLogger();
     private int attackTimer;
     private int randomSoundDelay=0;
 
-    private static final Logger LOGGER = LogManager.getLogger();
     public static final DataParameter<Integer> DWARF_PROFESSION = EntityDataManager.createKey(EntityDwarf.class, DataSerializers.VARINT);
     public static final DataParameter<Byte> AGGRESSIVE = EntityDataManager.createKey(EntityDwarf.class, DataSerializers.BYTE);
     private int randomTickDivider;
@@ -96,11 +97,11 @@ public class EntityDwarf extends EntityAgeable implements INpc, IMerchant
     private final InventoryBasic villagerInventory;
     private net.minecraftforge.fml.common.registry.VillagerRegistry.VillagerProfession prof;
     /** A multi-dimensional array mapping the various professions, careers and career levels that a Villager may offer */
-    public static final ITradeList[][][][] DWARF_TRADE_LIST_MAP = new ITradeList[][][][] {{{{new EmeraldForItems(Items.WHEAT, new PriceInfo(18, 22)), new EmeraldForItems(Items.POTATO, new PriceInfo(15, 19)), new EmeraldForItems(Items.CARROT, new PriceInfo(15, 19)), new ListItemForEmeralds(Itemsinit.BEER, new PriceInfo(2, 6))}, {new EmeraldForItems(Item.getItemFromBlock(Blocks.PUMPKIN), new PriceInfo(8, 13)), new ListItemForEmeralds(Items.PUMPKIN_PIE, new PriceInfo(-3, -2))}, {new EmeraldForItems(Item.getItemFromBlock(Blocks.MELON_BLOCK), new PriceInfo(7, 12)), new ListItemForEmeralds(Items.APPLE, new PriceInfo(-7, -5))}, {new ListItemForEmeralds(Items.COOKIE, new PriceInfo(-10, -6)), new ListItemForEmeralds(Items.CAKE, new PriceInfo(1, 1))}}},
-            {{{new EmeraldForItems(Items.COAL,new PriceInfo(10,16)),new ListItemForEmeralds(Items.REDSTONE,new PriceInfo(-6,-2)),new ListItemForEmeralds(Items.MINECART, new PriceInfo(7,15)),new EmeraldForItems(Item.getItemFromBlock(Blocks.RAIL), new PriceInfo(1,3)),new EmeraldForItems(Itemsinit.BEER,new PriceInfo(2,4))},{new ListItemForEmeralds(Item.getItemFromBlock(Blocks.GOLDEN_RAIL),new PriceInfo(2,6)),new ListItemForEmeralds(new ItemStack(Items.DYE,1,EnumDyeColor.BLUE.getDyeDamage()), new PriceInfo(2, 4)), new EmeraldForItems(Items.GOLD_INGOT,new PriceInfo(5,7)),new ListItemForEmeralds(Item.getItemFromBlock(Blocks.TNT),new PriceInfo(11,16))},{new ListItemForEmeralds(Items.QUARTZ,new PriceInfo(1,4)),new ListEnchantedItemForEmeralds(Itemsinit.GREAT_PICKAXE,new PriceInfo(45,64))}}},
-            {{{new ListItemForEmeralds(Itemsinit.Cartridge,new PriceInfo(1,4)),new EmeraldForItems(Items.GUNPOWDER,new PriceInfo(1,3)),new ListItemForEmeralds(Itemsinit.Grenade,new PriceInfo(3,7)),new EmeraldForItems(Itemsinit.BEER,new PriceInfo(2,4)),},{new ListItemForEmeralds(utils.getRandomShield(),new PriceInfo(12,23)),new ListEnchantedItemForEmeralds(Itemsinit.thunderer_hangun,new PriceInfo(21,36))},{new ListEnchantedItemForEmeralds(utils.getRandomarmor(1),new PriceInfo(16,19)),new ListEnchantedItemForEmeralds(utils.getRandomarmor(0),new PriceInfo(16,19))},{new ListEnchantedItemForEmeralds(Itemsinit.GrudgeRaker,new PriceInfo(31,45)),new ListItemForEmeralds(Itemsinit.Drakegun,new PriceInfo(43,60))}}},
-            {{{new ListItemForEmeralds(Item.getItemFromBlock(Blocks.CLAY),new PriceInfo(1,4)),new EmeraldForItems(new ItemStack(Item.getItemFromBlock(Blocks.NETHER_BRICK), 1, 0),new PriceInfo(8,18)),new ListItemForEmeralds(Item.getItemFromBlock(Blocks.RED_SANDSTONE),new PriceInfo(2,7))},{new ListItemForEmeralds(Item.getItemFromBlock(Blocks.CONCRETE_POWDER),new PriceInfo(2,7)),new EmeraldForItems(Itemsinit.BEER,new PriceInfo(2,4))},{new ListItemForEmeralds(Item.getItemFromBlock(Blocks.QUARTZ_BLOCK),new PriceInfo(2,4)),new ListItemForEmeralds(Item.getItemFromBlock(Blocks.PURPUR_BLOCK),new PriceInfo(3,7))}}},
-            {{{new EmeraldForItems(Itemsinit.BEER,new PriceInfo(3,6))},{new EmeraldForItems(Items.ROTTEN_FLESH,new PriceInfo(58,64))},{new EmeraldForItems(Items.PRISMARINE_CRYSTALS,new PriceInfo(2,5))},{new EmeraldForItems(Items.BLAZE_ROD,new PriceInfo(2,4))},{new ListEnchantedItemForItemAndEmeralds(Items.NETHER_STAR,new PriceInfo(1,1), Itemsinit.GHAL_MARAZ,new PriceInfo(1,1))}}},
+    public static final ITradeList[][][][] DWARF_TRADE_LIST_MAP = new ITradeList[][][][] {{{{new EmeraldForItems(Items.WHEAT, new PriceInfo(18, 22)), new EmeraldForItems(Items.POTATO, new PriceInfo(15, 19)), new EmeraldForItems(Items.CARROT, new PriceInfo(15, 19)), new ListItemForEmeralds(Itemsinit.BEER, new PriceInfo(1, 2))}, {new EmeraldForItems(Item.getItemFromBlock(Blocks.PUMPKIN), new PriceInfo(8, 13)), new ListItemForEmeralds(Items.PUMPKIN_PIE, new PriceInfo(-3, -2))}, {new EmeraldForItems(Item.getItemFromBlock(Blocks.MELON_BLOCK), new PriceInfo(7, 12)), new ListItemForEmeralds(Items.APPLE, new PriceInfo(-7, -5))}, {new ListItemForEmeralds(Items.COOKIE, new PriceInfo(-10, -6)), new ListItemForEmeralds(Items.CAKE, new PriceInfo(1, 1))}}},
+            {{{new EmeraldForItems(Items.COAL,new PriceInfo(10,16)),new ListItemForEmeralds(Items.REDSTONE,new PriceInfo(-6,-2)),new ListItemForEmeralds(Items.MINECART, new PriceInfo(7,15)),new EmeraldForItems(Item.getItemFromBlock(Blocks.RAIL), new PriceInfo(1,3)),new EmeraldForItems(Itemsinit.BEER,new PriceInfo(2,4))},{new ListItemForEmeralds(Item.getItemFromBlock(Blocks.GOLDEN_RAIL),new PriceInfo(2,6)),new ListItemForEmeralds(new ItemStack(Items.DYE,1,EnumDyeColor.BLUE.getDyeDamage()), new PriceInfo(2, 4)), new EmeraldForItems(Items.GOLD_INGOT,new PriceInfo(5,7)),new ListItemForEmeralds(Item.getItemFromBlock(Blocks.TNT),new PriceInfo(6,14))},{new ListItemForEmeralds(Items.QUARTZ,new PriceInfo(1,4)),new ListEnchantedItemForEmeralds(Itemsinit.GREAT_PICKAXE,new PriceInfo(41,58))}}},
+            {{{new ListItemForEmeralds(Itemsinit.Cartridge,new PriceInfo(-3,-1)),new EmeraldForItems(Items.GUNPOWDER,new PriceInfo(1,3)),new ListItemForEmeralds(Itemsinit.Grenade,new PriceInfo(3,6)),new EmeraldForItems(Itemsinit.BEER,new PriceInfo(2,4)),},{new ListItemForEmeralds(utils.getRandomShield(),new PriceInfo(8,16)),new ListEnchantedItemForEmeralds(Itemsinit.thunderer_hangun,new PriceInfo(21,36))},{new ListEnchantedItemForEmeralds(utils.getRandomarmor(1),new PriceInfo(16,19)),new ListEnchantedItemForEmeralds(utils.getRandomarmor(0),new PriceInfo(16,19))},{new ListEnchantedItemForEmeralds(Itemsinit.GrudgeRaker,new PriceInfo(31,45)),new ListItemForEmeralds(Itemsinit.Drakegun,new PriceInfo(43,60))}}},
+            {{{new ListItemForEmeralds(Item.getItemFromBlock(Blocks.CLAY),new PriceInfo(-3,-1)),new EmeraldForItems(new ItemStack(Item.getItemFromBlock(Blocks.NETHER_BRICK), 1, 0),new PriceInfo(8,18)),new ListItemForEmeralds(Item.getItemFromBlock(Blocks.RED_SANDSTONE),new PriceInfo(1,5))},{new ListItemForEmeralds(Item.getItemFromBlock(Blocks.CONCRETE_POWDER),new PriceInfo(1,5)),new EmeraldForItems(Itemsinit.BEER,new PriceInfo(2,4))},{new ListItemForEmeralds(Item.getItemFromBlock(Blocks.QUARTZ_BLOCK),new PriceInfo(2,4)),new ListItemForEmeralds(Item.getItemFromBlock(Blocks.PURPUR_BLOCK),new PriceInfo(2,4))}}},
+            {{{new EmeraldForItems(Itemsinit.BEER,new PriceInfo(1,3))},{new EmeraldForItems(Items.ROTTEN_FLESH,new PriceInfo(58,64))},{new EmeraldForItems(Items.PRISMARINE_CRYSTALS,new PriceInfo(2,5))},{new EmeraldForItems(Items.BLAZE_ROD,new PriceInfo(2,4))},{new ListEnchantedItemForItemAndEmeralds(Items.NETHER_STAR,new PriceInfo(1,1), Itemsinit.GHAL_MARAZ,new PriceInfo(1,1))}}},
             {{{new EmeraldForItems(Items.COOKED_PORKCHOP,new PriceInfo(8,15)),new EmeraldForItems(Itemsinit.BEER,new PriceInfo(2,4)),new EmeraldForItems(Items.COOKED_CHICKEN,new PriceInfo(9,17)),new EmeraldForItems(Items.COOKED_MUTTON,new PriceInfo(8,15))},{new EmeraldForItems(Items.COOKED_BEEF,new PriceInfo(6,14)),new ListItemForEmeralds(new ItemStack(Items.SKULL,1, utils.getrandomskull()),new PriceInfo(50,63))}}},
             {new ITradeList[0][]}};
 
@@ -1198,17 +1199,17 @@ public class EntityDwarf extends EntityAgeable implements INpc, IMerchant
     {
         public PriceInfo(int p_i45810_1_, int p_i45810_2_)
         {
-            super(Integer.valueOf(p_i45810_1_), Integer.valueOf(p_i45810_2_));
+            super(p_i45810_1_, p_i45810_2_);
 
             if (p_i45810_2_ < p_i45810_1_)
             {
-                EntityDwarf.LOGGER.warn("PriceRange({}, {}) invalid, {} smaller than {}", Integer.valueOf(p_i45810_1_), Integer.valueOf(p_i45810_2_), Integer.valueOf(p_i45810_2_), Integer.valueOf(p_i45810_1_));
+                EntityDwarf.LOGGER.warn("PriceRange({}, {}) invalid, {} smaller than {}", p_i45810_1_, p_i45810_2_, p_i45810_2_, p_i45810_1_);
             }
         }
 
         public int getPrice(Random rand)
         {
-            return this.getFirst().intValue() >= this.getSecond().intValue() ? this.getFirst().intValue() : this.getFirst().intValue() + rand.nextInt(this.getSecond().intValue() - this.getFirst().intValue() + 1);
+            return this.getFirst() >= this.getSecond() ? this.getFirst() : this.getFirst() + rand.nextInt(this.getSecond() - this.getFirst() + 1);
         }
     }
 

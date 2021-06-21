@@ -848,9 +848,7 @@ public class StructureSkavenVillagePieces
                 this.setBlockState(worldIn, iblockstate1, 5, 1, 4, structureBoundingBoxIn);
                 this.setBlockState(worldIn, Blocks.AIR.getDefaultState(), 4, 1, 4, structureBoundingBoxIn);
                 this.setBlockState(worldIn, iblockstate1, 3, 1, 4, structureBoundingBoxIn);
-                this.setBlockState(worldIn, iblockstate6, 6, 1, 3, structureBoundingBoxIn);
                 this.setBlockState(worldIn, Blocks.WOODEN_PRESSURE_PLATE.getDefaultState(), 6, 2, 3, structureBoundingBoxIn);
-                this.setBlockState(worldIn, iblockstate6, 4, 1, 3, structureBoundingBoxIn);
                 this.setBlockState(worldIn, Blocks.WOODEN_PRESSURE_PLATE.getDefaultState(), 4, 2, 3, structureBoundingBoxIn);
                 this.setBlockState(worldIn, Blocks.CRAFTING_TABLE.getDefaultState(), 7, 1, 1, structureBoundingBoxIn);
                 this.setBlockState(worldIn, Blocks.AIR.getDefaultState(), 1, 1, 0, structureBoundingBoxIn);
@@ -1930,10 +1928,15 @@ public class StructureSkavenVillagePieces
 
             protected void createVillageDoor(World p_189927_1_, StructureBoundingBox p_189927_2_, Random p_189927_3_, int p_189927_4_, int p_189927_5_, int p_189927_6_, EnumFacing p_189927_7_)
             {
-                if (!this.isZombieInfested)
-                {
+
                     this.generateDoor(p_189927_1_, p_189927_2_, p_189927_3_, p_189927_4_, p_189927_5_, p_189927_6_, EnumFacing.NORTH, this.biomeDoor());
-                }
+
+            }
+
+            protected void generateDoor(World worldIn, StructureBoundingBox sbb, Random rand, int x, int y, int z, EnumFacing facing, BlockDoor door)
+            {
+                this.setBlockState(worldIn, Blocks.AIR.getDefaultState(), x, y, z, sbb);
+                this.setBlockState(worldIn, Blocks.AIR.getDefaultState(), x, y + 1, z, sbb);
             }
 
             protected void placeTorch(World p_189926_1_, EnumFacing p_189926_2_, int p_189926_3_, int p_189926_4_, int p_189926_5_, StructureBoundingBox p_189926_6_)
@@ -2149,7 +2152,7 @@ public class StructureSkavenVillagePieces
                 }
 
                 this.setBlockState(worldIn, Blocks.AIR.getDefaultState(), 1, 1, 0, structureBoundingBoxIn);
-                this.setBlockState(worldIn, Blocks.SPRUCE_FENCE.getDefaultState(), 1, 2, 0, structureBoundingBoxIn);
+                this.setBlockState(worldIn, Blocks.AIR.getDefaultState(), 1, 2, 0, structureBoundingBoxIn);
                 this.createVillageDoor(worldIn, structureBoundingBoxIn, randomIn, 1, 1, 0, EnumFacing.NORTH);
 
                 if (this.getBlockStateFromPos(worldIn, 1, 0, -1, structureBoundingBoxIn).getMaterial() == Material.AIR && this.getBlockStateFromPos(worldIn, 1, -1, -1, structureBoundingBoxIn).getMaterial() != Material.AIR)

@@ -1,5 +1,8 @@
 package warhammermod.util.proxy;
 
+
+
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderFireball;
@@ -14,7 +17,6 @@ import net.minecraftforge.fml.client.registry.IRenderFactory;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.lwjgl.input.Keyboard;
 import warhammermod.Entities.*;
 import warhammermod.Entities.render.renderbullet;
 import warhammermod.Entities.render.rendergrenade;
@@ -23,8 +25,8 @@ import warhammermod.Items.Render.*;
 
 @SideOnly(Side.CLIENT)
 public class clientproxy extends commonproxy{
-    public static final KeyBinding horsedown = new KeyBinding("pegasus down", KeyConflictContext.IN_GAME, Keyboard.KEY_W,"Warhammermod");
-    public static final KeyBinding mapshow = new KeyBinding("show mod info", KeyConflictContext.IN_GAME, Keyboard.KEY_M,"Warhammermod");
+    public static final KeyBinding horsedown = new KeyBinding("pegasus down", KeyConflictContext.IN_GAME, 66,"Warhammermod");
+    public static final KeyBinding mapshow = new KeyBinding("show mod info", KeyConflictContext.IN_GAME, 77,"Warhammermod");
     public static int repeater_value=0;
 
     public void registerclient(){
